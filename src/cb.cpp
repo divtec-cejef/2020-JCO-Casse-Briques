@@ -34,5 +34,4 @@ void cb::on_pushButton_2_clicked()
     cb_jeu cbjeu;
     cbjeu.setModal(true);
     cbjeu.exec();
-
 }

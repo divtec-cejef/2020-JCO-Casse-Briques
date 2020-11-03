@@ -16,8 +16,8 @@ cb_jeu::~cb_jeu()
     delete ui;
 }
 
-
 void cb_jeu::on_pushButton_clicked()
 {
     this->close();
 }
+

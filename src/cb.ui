@@ -10,8 +10,23 @@
     <height>361</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="tabletTracking">
+   <bool>false</bool>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
   <property name="windowTitle">
    <string>Intro - Casse-briques</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="verticalLayoutWidget">
@@ -62,8 +77,8 @@
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>10</y>
-      <width>171</width>
+      <y>20</y>
+      <width>211</width>
       <height>51</height>
      </rect>
     </property>
@@ -132,6 +147,11 @@
    </property>
    <property name="text">
     <string>Quitter</string>
+   </property>
+  </action>
+  <action name="actionJouer">
+   <property name="text">
+    <string>Jouer</string>
    </property>
   </action>
  </widget>
