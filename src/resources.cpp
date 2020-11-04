@@ -79,7 +79,7 @@ que la compilation se fasse en mode *Release* et que le pseudo-constante `DEPLOY
                 resourceDir.cdUp(); // Quitte Contents
                 resourceDir.cdUp(); // Quitte GameFramwork.app
             #endif
-            // resourceDir.cdUp(); // Quitte 'debug...' !! ATTENTION : selon la version de QtCreator, cette ligne doit être supprimée.
+            //resourceDir.cdUp(); // Quitte 'debug...' !! ATTENTION : selon la version de QtCreator, cette ligne doit être supprimée.
             resourceDir.cdUp(); // Quitte 'build...'
         #endif
         resourceDir.cd("res");
