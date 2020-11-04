@@ -2548,19 +2548,49 @@ gamecore.o: ../src/gamecore.cpp ../src/gamecore.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qcontainerfwd.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qobject_impl.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QPointF \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QDebug \
+		../src/sprite.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtguiglobal.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtgui-config.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgets-config.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qvariant.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmap.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qdebug.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qhash.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmap.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qtextstream.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qiodevice.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qlocale.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qvariant.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qshareddata.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qset.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qcontiguouscache.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsharedpointer.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsharedpointer_impl.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qrect.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmargins.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsize.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpainterpath.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qmatrix.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpolygon.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qregion.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qwindowdefs.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qwindowdefs_win.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qdatastream.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qline.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixmap.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpaintdevice.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qcolor.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgb.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgba64.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qimage.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixelformat.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtransform.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QPixmap \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QTimer \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qtimer.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qbasictimer.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QDebug \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QSettings \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsettings.h \
 		../src/gamescene.h \
@@ -2569,37 +2599,11 @@ gamecore.o: ../src/gamecore.cpp ../src/gamecore.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qpointer.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QTime \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qdatetime.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QTimer \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qtimer.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qbasictimer.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QElapsedTimer \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qelapsedtimer.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsScene \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsscene.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtguiglobal.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtgui-config.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgets-config.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qrect.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmargins.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsize.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qbrush.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qcolor.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgb.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgba64.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qmatrix.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpolygon.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qregion.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qwindowdefs.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qwindowdefs_win.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qdatastream.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qline.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtransform.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpainterpath.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qimage.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpaintdevice.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixelformat.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixmap.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qfont.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpen.h \
 		../src/resources.h \

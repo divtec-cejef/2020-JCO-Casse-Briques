@@ -5,6 +5,7 @@
   @date     Février 2014
  */
 #include "gamecore.h"
+#include "sprite.h"
 
 #include <cmath>
 
@@ -22,7 +23,7 @@ const int SCENE_WIDTH = 1280;
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
 //! \param pParent      Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
 GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent) {
-    
+
     // Mémorise l'accès au canvas (qui gère le tick et l'affichage d'une scène)
     m_pGameCanvas = pGameCanvas;
     
@@ -34,7 +35,13 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::white));
     
     // Instancier et initialiser les sprite ici :
-    // ...
+    Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "rectangle2.png");
+    m_pScene->addSpriteToScene(pSprite);
+    pSprite->setPos(m_pScene->width()/2.00, 680);
+
+    // Animations du personnage
+    pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
+    pSprite->startAnimation(1000);
 
 
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.

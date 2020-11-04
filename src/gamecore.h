@@ -7,10 +7,9 @@
 #ifndef GAMECORE_H
 #define GAMECORE_H
 
-#include "sprite.h"
+
 #include <QObject>
 #include <QPointF>
-
 
 class GameCanvas;
 class GameScene;
