@@ -53,7 +53,7 @@ public:
     void retranslateUi(QWidget *MainFrm)
     {
         MainFrm->setWindowTitle(QCoreApplication::translate("MainFrm", "Game Framework", nullptr));
-        label->setText(QCoreApplication::translate("MainFrm", "Casse-briques", nullptr));
+        label->setText(QCoreApplication::translate("MainFrm", "Casse-briques JEU", nullptr));
     } // retranslateUi
 
 };
