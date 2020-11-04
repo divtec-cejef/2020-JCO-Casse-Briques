@@ -11,8 +11,11 @@
 #include <QObject>
 #include <QPointF>
 
+
 class GameCanvas;
 class GameScene;
+class Sprite;
+
 
 //! \brief Classe qui gère la logique du jeu.
 //!
@@ -42,9 +45,10 @@ signals:
     void notifyKeyReleased(int key);
 
 private:
-
     GameCanvas* m_pGameCanvas;
     GameScene* m_pScene;
+    Sprite* m_pPlayer;
+    int m_PlayerDirection = 1;
 
 private slots:
 

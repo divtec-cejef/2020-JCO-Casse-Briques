@@ -18,6 +18,8 @@
 #include "utilities.h"
 
 const int SCENE_WIDTH = 1280;
+const int PLAYER_SPEED = 150 ;
+Sprite* m_pPlayer;
 
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
@@ -37,7 +39,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Instancier et initialiser les sprite ici :
     Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "rectangle2.png");
     m_pScene->addSpriteToScene(pSprite);
-    pSprite->setPos(m_pScene->width()/2.00, 680);
+    pSprite->setPos(m_pScene->width()/2.00, 700);
+    m_pPlayer = pSprite;
 
     // Animations du personnage
     pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
@@ -61,8 +64,18 @@ GameCore::~GameCore() {
 //! \param key Numéro de la touche (voir les constantes Qt)
 //!
 void GameCore::keyPressed(int key) {
+
     emit notifyKeyPressed(key);
 
+    switch(key) {
+    case Qt::Key_Left:
+        if(m_pPlayer->left())
+         m_pPlayer->setX(m_pPlayer->x() - 20); break;
+
+    case Qt::Key_Right:
+        if(m_pPlayer->right() < m_pScene->width() - 10)
+        m_pPlayer->setX(m_pPlayer->x() + 20); break;
+    }
 }
 
 //! Traite le relâchement d'une touche.
@@ -76,6 +89,14 @@ void GameCore::keyReleased(int key) {
 //! Gère le déplacement de la Terre qui tourne en cercle.
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
+    // float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
+
+    // déplacement auto.
+    // m_pPlayer->setX(m_pPlayer->x() + distance);
+
+//    if (m_pPlayer->right() > m_pScene->width() ||
+//        m_pPlayer->left() < 0)
+//        m_PlayerDirection *= -1;
 }
 
 //! La souris a été déplacée.
@@ -94,4 +115,3 @@ void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons button
 void GameCore::mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons) {
     emit notifyMouseButtonReleased(mousePosition, buttons);
 }
-
