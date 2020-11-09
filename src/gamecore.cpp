@@ -11,14 +11,20 @@
 
 #include <QDebug>
 #include <QSettings>
+#include <QPainter>
 
 #include "gamescene.h"
 #include "gamecanvas.h"
 #include "resources.h"
 #include "utilities.h"
+#include "blueball.h"
+#include "bouncingspritehandler.h"
 
 const int SCENE_WIDTH = 1280;
-const int PLAYER_SPEED = 150 ;
+const int PLAYER_SPEED = 150;
+const QPointF BOUNCING_AREA_POS(700,300);
+const int BOUNCING_AREA_SIZE = 20;
+
 Sprite* m_pPlayer;
 
 //! Initialise le contrôleur de jeu.
@@ -37,12 +43,17 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::white));
     
     // Instancier et initialiser les sprite ici :
+
+    // Création de la zone de rebond
+    setupBouncingArea();
+
+    // Ajout d'un sprite du joueur (rectangle)
     Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "rectangle2.png");
     m_pScene->addSpriteToScene(pSprite);
     pSprite->setPos(m_pScene->width()/2.00, 700);
     m_pPlayer = pSprite;
 
-    // Animations du personnage
+    // Animations du personnage (rectangle)
     pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
     pSprite->startAnimation(1000);
 
@@ -89,14 +100,9 @@ void GameCore::keyReleased(int key) {
 //! Gère le déplacement de la Terre qui tourne en cercle.
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
-    // float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
+    float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
-    // déplacement auto.
-    // m_pPlayer->setX(m_pPlayer->x() + distance);
-
-//    if (m_pPlayer->right() > m_pScene->width() ||
-//        m_pPlayer->left() < 0)
-//        m_PlayerDirection *= -1;
+    m_pPlayer->setX(m_pPlayer->x());
 }
 
 //! La souris a été déplacée.
@@ -114,4 +120,42 @@ void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons button
 //! Traite le relâchement d'un bouton de la souris.
 void GameCore::mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons buttons) {
     emit notifyMouseButtonReleased(mousePosition, buttons);
+}
+
+
+//! Construit la zone de rebond, ainsi que la balle de tennis qui va s'y déplacer.
+void GameCore::setupBouncingArea() {
+    const int BRICK_SIZE = 15;
+
+        // Création des briques de délimitation de la zone et placement
+        QPixmap smallBrick(GameFramework::imagesPath() + "brique_small.png");
+        smallBrick = smallBrick.scaled(BRICK_SIZE,BRICK_SIZE);
+
+        // Création d'une image faite d'une suite horizontale de briques
+        QPixmap horizontalWall(BRICK_SIZE * BOUNCING_AREA_SIZE, BRICK_SIZE);
+        QPainter painterHW(&horizontalWall);
+        for (int col = 0; col < BOUNCING_AREA_SIZE; col++)
+            painterHW.drawPixmap(col * BRICK_SIZE,0, smallBrick);
+
+        // Création d'une image faite d'une suite verticale de briques
+        QPixmap verticalWall(BRICK_SIZE, BRICK_SIZE * BOUNCING_AREA_SIZE);
+        QPainter painterVW(&verticalWall);
+        for (int col = 0; col < BOUNCING_AREA_SIZE; col++)
+            painterVW.drawPixmap(0, col * BRICK_SIZE, smallBrick);
+
+        // Ajout de 4 sprites (utilisant les murs horizontaux et verticaux) pour délimiter
+        // une zone de rebond.
+//        m_pScene->addSpriteToScene(new Sprite(horizontalWall), BOUNCING_AREA_POS.x(), BOUNCING_AREA_POS.y() - BRICK_SIZE);
+//        m_pScene->addSpriteToScene(new Sprite(horizontalWall), BOUNCING_AREA_POS.x(), BOUNCING_AREA_POS.y()+ BOUNCING_AREA_SIZE * BRICK_SIZE);
+
+//        m_pScene->addSpriteToScene(new Sprite(verticalWall), BOUNCING_AREA_POS.x(), BOUNCING_AREA_POS.y());
+//        m_pScene->addSpriteToScene(new Sprite(verticalWall), BOUNCING_AREA_POS.x() + BOUNCING_AREA_SIZE * BRICK_SIZE - BRICK_SIZE, BOUNCING_AREA_POS.y());
+
+            m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::red));
+    // Création de la balle de tennis qui rebondi
+    Sprite* pTennisBall = new Sprite(GameFramework::imagesPath() + "tennisball.png");
+    pTennisBall->setTickHandler(new BouncingSpriteHandler);
+    pTennisBall->setPos(BOUNCING_AREA_POS + QPointF(10,100));
+    m_pScene->addSpriteToScene(pTennisBall);
+    pTennisBall->registerForTick();
 }

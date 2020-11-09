@@ -49,6 +49,8 @@ private:
     GameScene* m_pScene;
     Sprite* m_pPlayer;
     int m_PlayerDirection = 1;
+    void setupBlueBall();
+    void setupBouncingArea();
 
 private slots:
 
