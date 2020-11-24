@@ -23,7 +23,7 @@
 const int SCENE_WIDTH = 1280;
 const int PLAYER_SPEED = 150;
 const QPointF BOUNCING_AREA_POS(700,300);
-const int BOUNCING_AREA_SIZE = 20;
+const float BOUNCING_AREA_SIZE = 86.5;
 
 Sprite* m_pPlayer;
 
@@ -97,7 +97,6 @@ void GameCore::keyReleased(int key) {
 }
 
 //! Cadence.
-//! Gère le déplacement de la Terre qui tourne en cercle.
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
@@ -138,18 +137,18 @@ void GameCore::setupBouncingArea() {
             painterHW.drawPixmap(col * BRICK_SIZE,0, smallBrick);
 
         // Création d'une image faite d'une suite verticale de briques
-        QPixmap verticalWall(BRICK_SIZE, BRICK_SIZE * BOUNCING_AREA_SIZE);
+        QPixmap verticalWall(BRICK_SIZE, BRICK_SIZE * BOUNCING_AREA_SIZE - 38);
         QPainter painterVW(&verticalWall);
-        for (int col = 0; col < BOUNCING_AREA_SIZE; col++)
+        for (int col = 0; col < BOUNCING_AREA_SIZE - 38; col++)
             painterVW.drawPixmap(0, col * BRICK_SIZE, smallBrick);
 
         // Ajout de 4 sprites (utilisant les murs horizontaux et verticaux) pour délimiter
         // une zone de rebond.
-//        m_pScene->addSpriteToScene(new Sprite(horizontalWall), BOUNCING_AREA_POS.x(), BOUNCING_AREA_POS.y() - BRICK_SIZE);
-//        m_pScene->addSpriteToScene(new Sprite(horizontalWall), BOUNCING_AREA_POS.x(), BOUNCING_AREA_POS.y()+ BOUNCING_AREA_SIZE * BRICK_SIZE);
+        m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 0);
+        m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 710);
 
-//        m_pScene->addSpriteToScene(new Sprite(verticalWall), BOUNCING_AREA_POS.x(), BOUNCING_AREA_POS.y());
-//        m_pScene->addSpriteToScene(new Sprite(verticalWall), BOUNCING_AREA_POS.x() + BOUNCING_AREA_SIZE * BRICK_SIZE - BRICK_SIZE, BOUNCING_AREA_POS.y());
+        m_pScene->addSpriteToScene(new Sprite(verticalWall), -15, 0);
+        m_pScene->addSpriteToScene(new Sprite(verticalWall), 1280, 0);
 
             m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::red));
     // Création de la balle de tennis qui rebondi
