@@ -10,14 +10,42 @@
     <height>1025</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>8514oem</family>
+    <pointsize>15</pointsize>
+    <weight>75</weight>
+    <bold>true</bold>
+    <underline>true</underline>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>Game Framework</string>
+   <string>Casse-briques</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../Users/broqray/Desktop/icon.png</normaloff>../../../Users/broqray/Desktop/icon.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>8514oem</family>
+       <pointsize>8</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>false</underline>
+      </font>
+     </property>
      <property name="text">
-      <string>Casse-briques JEU</string>
+      <string>Bienvenue sur Casse-Briques !</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>

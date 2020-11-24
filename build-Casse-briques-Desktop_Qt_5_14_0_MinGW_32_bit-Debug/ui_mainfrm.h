@@ -10,6 +10,7 @@
 #define UI_MAINFRM_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QVBoxLayout>
@@ -30,12 +31,31 @@ public:
         if (MainFrm->objectName().isEmpty())
             MainFrm->setObjectName(QString::fromUtf8("MainFrm"));
         MainFrm->resize(1480, 1025);
+        QFont font;
+        font.setFamily(QString::fromUtf8("8514oem"));
+        font.setPointSize(15);
+        font.setBold(true);
+        font.setUnderline(true);
+        font.setWeight(75);
+        MainFrm->setFont(font);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../../../Users/broqray/Desktop/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainFrm->setWindowIcon(icon);
         verticalLayout = new QVBoxLayout(MainFrm);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         label = new QLabel(MainFrm);
         label->setObjectName(QString::fromUtf8("label"));
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("8514oem"));
+        font1.setPointSize(8);
+        font1.setBold(true);
+        font1.setUnderline(false);
+        font1.setWeight(75);
+        label->setFont(font1);
+        label->setScaledContents(false);
+        label->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(label);
 
@@ -52,8 +72,8 @@ public:
 
     void retranslateUi(QWidget *MainFrm)
     {
-        MainFrm->setWindowTitle(QCoreApplication::translate("MainFrm", "Game Framework", nullptr));
-        label->setText(QCoreApplication::translate("MainFrm", "Casse-briques JEU", nullptr));
+        MainFrm->setWindowTitle(QCoreApplication::translate("MainFrm", "Casse-briques", nullptr));
+        label->setText(QCoreApplication::translate("MainFrm", "Bienvenue sur Casse-Briques !", nullptr));
     } // retranslateUi
 
 };

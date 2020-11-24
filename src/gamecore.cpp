@@ -126,31 +126,36 @@ void GameCore::mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons butto
 void GameCore::setupBouncingArea() {
     const int BRICK_SIZE = 15;
 
-        // Création des briques de délimitation de la zone et placement
-        QPixmap smallBrick(GameFramework::imagesPath() + "brique_small.png");
-        smallBrick = smallBrick.scaled(BRICK_SIZE,BRICK_SIZE);
+    // Création des briques de délimitation de la zone et placement
+    QPixmap smallBrick(GameFramework::imagesPath() + "brique_small.png");
+    smallBrick = smallBrick.scaled(BRICK_SIZE,BRICK_SIZE);
 
-        // Création d'une image faite d'une suite horizontale de briques
-        QPixmap horizontalWall(BRICK_SIZE * BOUNCING_AREA_SIZE, BRICK_SIZE);
-        QPainter painterHW(&horizontalWall);
-        for (int col = 0; col < BOUNCING_AREA_SIZE; col++)
-            painterHW.drawPixmap(col * BRICK_SIZE,0, smallBrick);
+    // Création d'un back-ground
+    QPixmap backGroundCB(0,0);
+    //QPainter painterBG(&backGroundCB);
 
-        // Création d'une image faite d'une suite verticale de briques
-        QPixmap verticalWall(BRICK_SIZE, BRICK_SIZE * BOUNCING_AREA_SIZE - 38);
-        QPainter painterVW(&verticalWall);
-        for (int col = 0; col < BOUNCING_AREA_SIZE - 38; col++)
-            painterVW.drawPixmap(0, col * BRICK_SIZE, smallBrick);
+    // Création d'une image faite d'une suite horizontale de briques
+    QPixmap horizontalWall(BRICK_SIZE * BOUNCING_AREA_SIZE, BRICK_SIZE);
+    QPainter painterHW(&horizontalWall);
+    for (int col = 0; col < BOUNCING_AREA_SIZE; col++)
+         painterHW.drawPixmap(col * BRICK_SIZE,0, smallBrick);
 
-        // Ajout de 4 sprites (utilisant les murs horizontaux et verticaux) pour délimiter
-        // une zone de rebond.
-        m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 0);
-        m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 710);
+    // Création d'une image faite d'une suite verticale de briques
+    QPixmap verticalWall(BRICK_SIZE, BRICK_SIZE * BOUNCING_AREA_SIZE - 38);
+    QPainter painterVW(&verticalWall);
+    for (int col = 0; col < BOUNCING_AREA_SIZE - 38; col++)
+         painterVW.drawPixmap(0, col * BRICK_SIZE, smallBrick);
 
-        m_pScene->addSpriteToScene(new Sprite(verticalWall), -15, 0);
-        m_pScene->addSpriteToScene(new Sprite(verticalWall), 1280, 0);
+    // Ajout de 4 sprites (utilisant les murs horizontaux et verticaux) pour délimiter
+    // une zone de rebond.
+    m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 0);
+    m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 720);
 
-            m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::red));
+    m_pScene->addSpriteToScene(new Sprite(verticalWall), -15, 0);
+    m_pScene->addSpriteToScene(new Sprite(verticalWall), 1281, 0);
+
+    m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::red));
+
     // Création de la balle de tennis qui rebondi
     Sprite* pTennisBall = new Sprite(GameFramework::imagesPath() + "tennisball.png");
     pTennisBall->setTickHandler(new BouncingSpriteHandler);
