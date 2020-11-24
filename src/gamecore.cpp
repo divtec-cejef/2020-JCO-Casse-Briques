@@ -130,10 +130,6 @@ void GameCore::setupBouncingArea() {
     QPixmap smallBrick(GameFramework::imagesPath() + "brique_small.png");
     smallBrick = smallBrick.scaled(BRICK_SIZE,BRICK_SIZE);
 
-    // Création d'un back-ground
-    QPixmap backGroundCB(0,0);
-    //QPainter painterBG(&backGroundCB);
-
     // Création d'une image faite d'une suite horizontale de briques
     QPixmap horizontalWall(BRICK_SIZE * BOUNCING_AREA_SIZE, BRICK_SIZE);
     QPainter painterHW(&horizontalWall);
@@ -157,7 +153,7 @@ void GameCore::setupBouncingArea() {
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::red));
 
     // Création de la balle de tennis qui rebondi
-    Sprite* pTennisBall = new Sprite(GameFramework::imagesPath() + "tennisball.png");
+    Sprite* pTennisBall = new Sprite(GameFramework::imagesPath() + "ball-foot2.png");
     pTennisBall->setTickHandler(new BouncingSpriteHandler);
     pTennisBall->setPos(BOUNCING_AREA_POS + QPointF(10,100));
     m_pScene->addSpriteToScene(pTennisBall);

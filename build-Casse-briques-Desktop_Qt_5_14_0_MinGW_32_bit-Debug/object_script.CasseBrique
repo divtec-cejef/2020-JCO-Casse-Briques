@@ -1,4 +1,5 @@
 main.o
+Enemy.o
 keytickhandler.o
 mainfrm.o
 gamescene.o
@@ -18,6 +19,7 @@ bouncingspritehandler.o
 manualwalkinghandler.o
 automaticwalkinghandler.o
 moc_mainfrm.o
+moc_Enemy.o
 moc_gamescene.o
 moc_keytickhandler.o
 moc_player.o
