@@ -63,6 +63,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // sinon le temps passé jusqu'au premier tick (ElapsedTime) peut être élevé et provoquer de gros
     // déplacements, surtout si le déboggueur est démarré.
     m_pGameCanvas->startTick();
+
 }
 
 //! Destructeur de GameCore : efface les scènes
@@ -101,6 +102,11 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
+    // Test si la balle touche le mur
+    if (! (static_cast<GameScene*>(pTennisBall->scene())->collidingSprites(pTennisBall).isEmpty())) {
+        pTennisBall->setPos(0,0);
+    }
+
     m_pPlayer->setX(m_pPlayer->x());
 }
 
@@ -127,7 +133,7 @@ void GameCore::setupBouncingArea() {
     const int BRICK_SIZE = 15;
 
     // Création des briques de délimitation de la zone et placement
-    QPixmap smallBrick(GameFramework::imagesPath() + "brique_small.png");
+    QPixmap smallBrick(GameFramework::imagesPath() + "wall.png");
     smallBrick = smallBrick.scaled(BRICK_SIZE,BRICK_SIZE);
 
     // Création d'une image faite d'une suite horizontale de briques
@@ -153,9 +159,10 @@ void GameCore::setupBouncingArea() {
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::red));
 
     // Création de la balle de tennis qui rebondi
-    Sprite* pTennisBall = new Sprite(GameFramework::imagesPath() + "ball-foot2.png");
+    pTennisBall = new Sprite(GameFramework::imagesPath() + "basket.png");
     pTennisBall->setTickHandler(new BouncingSpriteHandler);
     pTennisBall->setPos(BOUNCING_AREA_POS + QPointF(10,100));
     m_pScene->addSpriteToScene(pTennisBall);
+
     pTennisBall->registerForTick();
 }

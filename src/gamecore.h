@@ -51,6 +51,7 @@ private:
     int m_PlayerDirection = 1;
     void setupBlueBall();
     void setupBouncingArea();
+    Sprite* pTennisBall;
 
 private slots:
 
