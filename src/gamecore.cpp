@@ -20,10 +20,15 @@
 #include "blueball.h"
 #include "bouncingspritehandler.h"
 
+
 const int SCENE_WIDTH = 1280;
 const int PLAYER_SPEED = 150;
+const int valeurAttenteEnMM = 4000;
 const QPointF BOUNCING_AREA_POS(700,300);
 const float BOUNCING_AREA_SIZE = 86.5;
+
+int compteurTimer = 0;
+bool isWaiting = false;
 
 Sprite* m_pPlayer;
 
@@ -50,7 +55,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Ajout d'un sprite du joueur (rectangle)
     Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "rectangle2.png");
     m_pScene->addSpriteToScene(pSprite);
-    pSprite->setPos(m_pScene->width()/2.00, 700);
+    pSprite->setPos(m_pScene->width()/2.00, 650);
     m_pPlayer = pSprite;
 
     // Animations du personnage (rectangle)
@@ -82,11 +87,11 @@ void GameCore::keyPressed(int key) {
     switch(key) {
     case Qt::Key_Left:
         if(m_pPlayer->left())
-         m_pPlayer->setX(m_pPlayer->x() - 20); break;
+            m_pPlayer->setX(m_pPlayer->x() - 20); break;
 
     case Qt::Key_Right:
         if(m_pPlayer->right() < m_pScene->width() - 10)
-        m_pPlayer->setX(m_pPlayer->x() + 20); break;
+            m_pPlayer->setX(m_pPlayer->x() + 20); break;
     }
 }
 
@@ -100,14 +105,27 @@ void GameCore::keyReleased(int key) {
 //! Cadence.
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
-    float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
+    //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
-    // Test si la balle touche le mur, la téléporte en haut
-    if (pTennisBall->y() >= 684) {
-        pTennisBall->setPos(pTennisBall->x(),0);
-        //qDebug() << pTennisBall->y();
+    qDebug() << pTennisBall->y();
+    // Test si la balle touche le mur du bas, mets la boule en "pause"
+    if (pTennisBall->y() >= 680) {
+        isWaiting = true;
     }
 
+    // Bloque la balle au centre en haut pendant 2 secondes.
+    if (isWaiting) {
+        pTennisBall->setPos(SCENE_WIDTH/2,0);
+        compteurTimer += elapsedTimeInMilliseconds;
+    }
+
+    // Si 2 secondes se sont passées, la balle continue sa tragectoire normalement.
+    if (compteurTimer > valeurAttenteEnMM) {
+        // réinitialise les valeurs
+        isWaiting = false;
+        compteurTimer = 0;
+
+    }
     m_pPlayer->setX(m_pPlayer->x());
 }
 
@@ -141,13 +159,13 @@ void GameCore::setupBouncingArea() {
     QPixmap horizontalWall(BRICK_SIZE * BOUNCING_AREA_SIZE, BRICK_SIZE);
     QPainter painterHW(&horizontalWall);
     for (int col = 0; col < BOUNCING_AREA_SIZE; col++)
-         painterHW.drawPixmap(col * BRICK_SIZE,0, smallBrick);
+        painterHW.drawPixmap(col * BRICK_SIZE,0, smallBrick);
 
     // Création d'une image faite d'une suite verticale de briques
     QPixmap verticalWall(BRICK_SIZE, BRICK_SIZE * BOUNCING_AREA_SIZE - 38);
     QPainter painterVW(&verticalWall);
     for (int col = 0; col < BOUNCING_AREA_SIZE - 38; col++)
-         painterVW.drawPixmap(0, col * BRICK_SIZE, smallBrick);
+        painterVW.drawPixmap(0, col * BRICK_SIZE, smallBrick);
 
     // Ajout de 4 sprites (utilisant les murs horizontaux et verticaux) pour délimiter
     // une zone de rebond.
