@@ -48,10 +48,11 @@ private:
     GameCanvas* m_pGameCanvas;
     GameScene* m_pScene;
     Sprite* m_pPlayer;
+    Sprite* m_pBloc;
     int m_PlayerDirection = 1;
     void setupBlueBall();
     void setupBouncingArea();
-    Sprite* pTennisBall;
+    Sprite* m_pTennisBall;
 
 private slots:
 

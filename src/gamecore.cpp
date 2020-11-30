@@ -20,16 +20,15 @@
 #include "blueball.h"
 #include "bouncingspritehandler.h"
 
-
 const int SCENE_WIDTH = 1280;
 const int PLAYER_SPEED = 150;
-const int valeurAttenteEnMM = 4000;
-const int centrageXBouleRespawn = 15;
-const int centrageYBouleRespawn = 30;
+const int WAITING_VALUE_IN_MS = 4000;
+const int CENTERING_POS_X_BALL_RESPAWN = 15;
+const int CENTERING_POS_Y_BALL_RESPAWN = 30;
 const QPointF BOUNCING_AREA_POS(700,300);
 const float BOUNCING_AREA_SIZE = 86.5;
 
-int compteurTimer = 0;
+int timerCounter = 0;
 bool isWaiting = false;
 
 Sprite* m_pPlayer;
@@ -59,6 +58,25 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene->addSpriteToScene(pSprite);
     pSprite->setPos(m_pScene->width()/2.00, 650);
     m_pPlayer = pSprite;
+
+
+    int spaceLines = 0;
+    int spaceColumns = 0;
+
+    // Ajout des blocs (18x3)
+    for (int j=0;j<3;j++) {
+
+        for (int i=0;i<18;i++) {
+            // Ajout d'un sprite d'un sprite cube (obstacle à casser)
+            Sprite* pBlocSprite = new Sprite(GameFramework::imagesPath() + "wall.png");
+            m_pScene->addSpriteToScene(pBlocSprite);
+            pBlocSprite->setPos(50 + spaceLines, 70 + spaceColumns);
+            spaceLines += 65;
+        }
+        spaceLines = 0;
+        spaceColumns += 65;
+    }
+
 
     // Animations du personnage (rectangle)
     pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
@@ -94,6 +112,9 @@ void GameCore::keyPressed(int key) {
     case Qt::Key_Right:
         if(m_pPlayer->right() < m_pScene->width() - 10)
             m_pPlayer->setX(m_pPlayer->x() + 20); break;
+
+    case Qt::Key_L:
+        isWaiting = false; break;
     }
 }
 
@@ -109,25 +130,27 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
-    qDebug() << pTennisBall->y();
+    // qDebug() << pTennisBall->y();
     // Test si la balle touche le mur du bas, mets la boule en "pause"
-    if (pTennisBall->y() >= 680) {
+    if (m_pTennisBall->y() >= 680) {
         isWaiting = true;
     }
 
-    // Bloque la balle au centre en haut pendant 2 secondes.
+    // Bloque la balle au centre du rectangle pendant 2 secondes.
     if (isWaiting) {
-        pTennisBall->setPos(m_pPlayer->x() + centrageXBouleRespawn ,m_pPlayer->y() - centrageYBouleRespawn);
-        compteurTimer += elapsedTimeInMilliseconds;
+        //m_pTennisBall->unregisterFromTick();
+        m_pTennisBall->setPos(m_pPlayer->x() + CENTERING_POS_X_BALL_RESPAWN ,m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
+        timerCounter += elapsedTimeInMilliseconds;
+        // Si 2 secondes se sont passées, la balle continue sa tragectoire normalement.
+        // keyPressed(Qt::Key_L)
+        if (timerCounter > WAITING_VALUE_IN_MS) {
+            // réinitialise les valeurs
+            isWaiting = false;
+            timerCounter = 0;
+            //m_pTennisBall->registerForTick();
+        }
     }
 
-    // Si 2 secondes se sont passées, la balle continue sa tragectoire normalement.
-    if (compteurTimer > valeurAttenteEnMM) {
-        // réinitialise les valeurs
-        isWaiting = false;
-        compteurTimer = 0;
-
-    }
     m_pPlayer->setX(m_pPlayer->x());
 }
 
@@ -180,10 +203,11 @@ void GameCore::setupBouncingArea() {
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::red));
 
     // Création de la balle de tennis qui rebondi
-    pTennisBall = new Sprite(GameFramework::imagesPath() + "basket.png");
-    pTennisBall->setTickHandler(new BouncingSpriteHandler);
-    pTennisBall->setPos(BOUNCING_AREA_POS + QPointF(10,100));
-    m_pScene->addSpriteToScene(pTennisBall);
+    m_pTennisBall = new Sprite(GameFramework::imagesPath() + "basket.png");
+    m_pTennisBall->setTickHandler(new BouncingSpriteHandler);
+    m_pTennisBall->setPos(BOUNCING_AREA_POS + QPointF(10,100));
+    m_pScene->addSpriteToScene(m_pTennisBall);
 
-    pTennisBall->registerForTick();
+
+    m_pTennisBall->registerForTick();
 }
