@@ -24,6 +24,8 @@
 const int SCENE_WIDTH = 1280;
 const int PLAYER_SPEED = 150;
 const int valeurAttenteEnMM = 4000;
+const int centrageXBouleRespawn = 15;
+const int centrageYBouleRespawn = 30;
 const QPointF BOUNCING_AREA_POS(700,300);
 const float BOUNCING_AREA_SIZE = 86.5;
 
@@ -115,7 +117,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
     // Bloque la balle au centre en haut pendant 2 secondes.
     if (isWaiting) {
-        pTennisBall->setPos(SCENE_WIDTH/2,0);
+        pTennisBall->setPos(m_pPlayer->x() + centrageXBouleRespawn ,m_pPlayer->y() - centrageYBouleRespawn);
         compteurTimer += elapsedTimeInMilliseconds;
     }
 
