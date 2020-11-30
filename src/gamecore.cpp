@@ -102,9 +102,10 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
-    // Test si la balle touche le mur
-    if (! (static_cast<GameScene*>(pTennisBall->scene())->collidingSprites(pTennisBall).isEmpty())) {
-        pTennisBall->setPos(0,0);
+    // Test si la balle touche le mur, la téléporte en haut
+    if (pTennisBall->y() >= 684) {
+        pTennisBall->setPos(pTennisBall->x(),0);
+        //qDebug() << pTennisBall->y();
     }
 
     m_pPlayer->setX(m_pPlayer->x());
