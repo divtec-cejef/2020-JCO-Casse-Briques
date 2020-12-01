@@ -24,7 +24,7 @@ const int SCENE_WIDTH = 1280;
 const int PLAYER_SPEED = 150;
 const int WAITING_VALUE_IN_MS = 4000;
 const int CENTERING_POS_X_BALL_RESPAWN = 15;
-const int CENTERING_POS_Y_BALL_RESPAWN = 30;
+const int CENTERING_POS_Y_BALL_RESPAWN = 40;
 const QPointF BOUNCING_AREA_POS(700,300);
 const float BOUNCING_AREA_SIZE = 86.5;
 
@@ -113,7 +113,7 @@ void GameCore::keyPressed(int key) {
         if(m_pPlayer->right() < m_pScene->width() - 10)
             m_pPlayer->setX(m_pPlayer->x() + 20); break;
 
-    case Qt::Key_L:
+    case Qt::Key_Space: m_keySpacePressed = true;
         isWaiting = false; break;
     }
 }
@@ -145,7 +145,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         timerCounter += elapsedTimeInMilliseconds;
         // Si 2 secondes se sont passées, la balle continue sa tragectoire normalement.
         // keyPressed(Qt::Key_L)
-        if (timerCounter > WAITING_VALUE_IN_MS) {
+        if (timerCounter > WAITING_VALUE_IN_MS && !m_keySpacePressed) {
             // réinitialise les valeurs
             isWaiting = false;
             timerCounter = 0;

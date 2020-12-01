@@ -53,6 +53,7 @@ private:
     void setupBlueBall();
     void setupBouncingArea();
     Sprite* m_pTennisBall;
+    bool m_keySpacePressed;
 
 private slots:
 

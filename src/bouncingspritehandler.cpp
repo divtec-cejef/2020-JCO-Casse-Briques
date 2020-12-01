@@ -45,7 +45,7 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
     auto collidingSprites = m_pParentSprite->parentScene()->collidingSprites(nextSpriteRect);
 
     // Supprimer le sprite lui-même, qui collisionne toujours avec sa boundingbox
-        collidingSprites.removeAll(m_pParentSprite);
+    collidingSprites.removeAll(m_pParentSprite);
 
     if (!collidingSprites.isEmpty())  {
         // On ne considère que la première collision (au cas où il y en aurait plusieurs)
@@ -65,9 +65,10 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
         float minOverlapY = ballFromTop ? overlapTop : overlapBottom;
 
         if(std::abs(minOverlapX) < std::abs(minOverlapY))
-            m_spriteVelocity.setX(ballFromLeft ? -INITIAL_VELOCITY :INITIAL_VELOCITY);
+            m_spriteVelocity.setX(ballFromLeft ? -200 : 200);
         else
             m_spriteVelocity.setY(ballFromTop ? -INITIAL_VELOCITY : INITIAL_VELOCITY);
+
 
         spriteMovement = m_spriteVelocity * elapsedTimeInMilliseconds / 1000.;
     }
