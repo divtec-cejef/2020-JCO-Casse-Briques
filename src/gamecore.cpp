@@ -130,9 +130,11 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
-    // qDebug() << pTennisBall->y();
-    // Test si la balle touche le mur du bas, mets la boule en "pause"
-    if (m_pTennisBall->y() >= 680) {
+    qDebug() << "Valeur Y " << m_pTennisBall->y() << "| Valeur X : " << m_pTennisBall->x();
+    // Test si la balle dépasse la valeur du mur du bas
+    if (m_pTennisBall->y() >= 685) {
+        qDebug() << "Valeur X dans test" << m_pTennisBall->x();
+        qDebug() << "Valeur Y dans test " << m_pTennisBall->y();
         isWaiting = true;
     }
 
@@ -205,7 +207,7 @@ void GameCore::setupBouncingArea() {
     // Création de la balle de tennis qui rebondi
     m_pTennisBall = new Sprite(GameFramework::imagesPath() + "basket.png");
     m_pTennisBall->setTickHandler(new BouncingSpriteHandler);
-    m_pTennisBall->setPos(BOUNCING_AREA_POS + QPointF(10,100));
+    m_pTennisBall->setPos(0,0);
     m_pScene->addSpriteToScene(m_pTennisBall);
 
 

@@ -45,7 +45,7 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
     auto collidingSprites = m_pParentSprite->parentScene()->collidingSprites(nextSpriteRect);
 
     // Supprimer le sprite lui-même, qui collisionne toujours avec sa boundingbox
-    collidingSprites.removeAll(m_pParentSprite);
+        collidingSprites.removeAll(m_pParentSprite);
 
     if (!collidingSprites.isEmpty())  {
         // On ne considère que la première collision (au cas où il y en aurait plusieurs)

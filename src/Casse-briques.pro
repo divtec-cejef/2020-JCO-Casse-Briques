@@ -17,7 +17,6 @@ TEMPLATE = app
 #DEFINES += DEPLOY # Pour une compilation dans un but de déploiement
 
 SOURCES += main.cpp\
-    Enemy.cpp \
     keytickhandler.cpp \
         mainfrm.cpp \
     gamescene.cpp \

@@ -1,5 +1,4 @@
 main.o
-Enemy.o
 keytickhandler.o
 mainfrm.o
 gamescene.o
