@@ -19,6 +19,7 @@
 #include "utilities.h"
 #include "blueball.h"
 #include "bouncingspritehandler.h"
+#include "playertickhandler.h"
 
 const int SCENE_WIDTH = 1280;
 const int PLAYER_SPEED = 150;
@@ -143,18 +144,31 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         //m_pTennisBall->unregisterFromTick();
         m_pTennisBall->setPos(m_pPlayer->x() + CENTERING_POS_X_BALL_RESPAWN ,m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
         timerCounter += elapsedTimeInMilliseconds;
-        // Si 2 secondes se sont passées, la balle continue sa tragectoire normalement.
-        // keyPressed(Qt::Key_L)
-        if (timerCounter > WAITING_VALUE_IN_MS && !m_keySpacePressed) {
+        // Si 2 secondes se sont passées, et si l'utilisateur appuie sur Espace
+        // la balle continue sa tragectoire normalement
+        if (m_keySpacePressed) {
             // réinitialise les valeurs
             isWaiting = false;
             timerCounter = 0;
+             m_keySpacePressed = false;
             //m_pTennisBall->registerForTick();
         }
     }
 
+
     m_pPlayer->setX(m_pPlayer->x());
 }
+
+void PlayerTickHandler::tick(long long elapsedTimeInMilliseconds) {
+    double spriteMovement = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.;
+
+    QPointF spriteMovementQPoint (spriteMovement, spriteMovement);
+
+    // Détermine la prochaine position du sprite
+    QRectF nextSpriteRect = m_pParentSprite->globalBoundingBox().translated(spriteMovementQPoint);
+
+    // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
+    //auto collidingSprites = m_playerDirection->
 
 //! La souris a été déplacée.
 //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView

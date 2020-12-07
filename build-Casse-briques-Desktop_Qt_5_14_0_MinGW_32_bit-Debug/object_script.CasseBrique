@@ -3,6 +3,7 @@ keytickhandler.o
 mainfrm.o
 gamescene.o
 player.o
+playertickhandler.o
 randommovetickhandler.o
 sprite.o
 gamecore.o
