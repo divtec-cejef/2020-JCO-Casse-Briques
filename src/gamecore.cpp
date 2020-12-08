@@ -29,11 +29,8 @@ const int CENTERING_POS_Y_BALL_RESPAWN = 40;
 const QPointF BOUNCING_AREA_POS(700,300);
 const float BOUNCING_AREA_SIZE = 86.5;
 
-int timerCounter = 0;
-bool isWaiting = false;
 
 Sprite* m_pPlayer;
-
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
 //! \param pParent      Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
@@ -73,6 +70,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
             m_pScene->addSpriteToScene(pBlocSprite);
             pBlocSprite->setPos(50 + spaceLines, 70 + spaceColumns);
             spaceLines += 65;
+            pBlocSprite->setData(0,"bloc-a-detruire");
         }
         spaceLines = 0;
         spaceColumns += 65;
@@ -137,38 +135,33 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         qDebug() << "Valeur X dans test" << m_pTennisBall->x();
         qDebug() << "Valeur Y dans test " << m_pTennisBall->y();
         isWaiting = true;
+
     }
 
     // Bloque la balle au centre du rectangle pendant 2 secondes.
     if (isWaiting) {
-        //m_pTennisBall->unregisterFromTick();
+
         m_pTennisBall->setPos(m_pPlayer->x() + CENTERING_POS_X_BALL_RESPAWN ,m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
-        timerCounter += elapsedTimeInMilliseconds;
+        m_pTennisBall->unregisterFromTick();
         // Si 2 secondes se sont passées, et si l'utilisateur appuie sur Espace
-        // la balle continue sa tragectoire normalement
+        // la balle continue sa trajectoire normalement
+        qDebug() << "Code avant test";
         if (m_keySpacePressed) {
+            m_pTennisBall->registerForTick();
+            qDebug() << "Code execute";
             // réinitialise les valeurs
             isWaiting = false;
-            timerCounter = 0;
-             m_keySpacePressed = false;
-            //m_pTennisBall->registerForTick();
+            m_keySpacePressed = false;
+
+            qDebug() << "Code execute apres register";
         }
     }
 
+    //PlayerTickHandler();
 
-    m_pPlayer->setX(m_pPlayer->x());
+
+    //m_pPlayer->setX(m_pPlayer->x());
 }
-
-void PlayerTickHandler::tick(long long elapsedTimeInMilliseconds) {
-    double spriteMovement = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.;
-
-    QPointF spriteMovementQPoint (spriteMovement, spriteMovement);
-
-    // Détermine la prochaine position du sprite
-    QRectF nextSpriteRect = m_pParentSprite->globalBoundingBox().translated(spriteMovementQPoint);
-
-    // Récupère tous les sprites de la scène que toucherait ce sprite à sa prochaine position
-    //auto collidingSprites = m_playerDirection->
 
 //! La souris a été déplacée.
 //! Pour que cet événement soit pris en compte, la propriété MouseTracking de GameView

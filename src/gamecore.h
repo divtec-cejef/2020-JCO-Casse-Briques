@@ -54,6 +54,7 @@ private:
     void setupBouncingArea();
     Sprite* m_pTennisBall;
     bool m_keySpacePressed;
+    bool isWaiting = false;
 
 private slots:
 

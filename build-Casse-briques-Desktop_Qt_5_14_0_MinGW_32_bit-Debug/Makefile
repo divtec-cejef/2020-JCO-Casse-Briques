@@ -1995,33 +1995,6 @@ mainfrm.o: ../src/mainfrm.cpp ../src/mainfrm.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qvector2d.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtouchdevice.h \
 		ui_mainfrm.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QVariant \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QIcon \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qicon.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QApplication \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qapplication.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qcoreapplication.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qeventloop.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qdesktopwidget.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qguiapplication.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qinputmethod.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QLabel \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qlabel.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qframe.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QVBoxLayout \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qboxlayout.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qlayout.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qlayoutitem.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgridlayout.h \
-		../src/gameview.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsView \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsview.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpainter.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtextoption.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpen.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qscrollarea.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qabstractscrollarea.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsscene.h \
 		../src/gamecanvas.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QObject \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QPointer \
@@ -2402,7 +2375,16 @@ playertickhandler.o: ../src/playertickhandler.cpp ../src/playertickhandler.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsscene.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qbrush.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qfont.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpen.h
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpen.h \
+		../src/gamecore.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QDebug \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QSettings \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsettings.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QPainter \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpainter.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtextoption.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qfontinfo.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qfontmetrics.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o playertickhandler.o ..\src\playertickhandler.cpp
 
 randommovetickhandler.o: ../src/randommovetickhandler.cpp ../src/randommovetickhandler.h \
@@ -2762,7 +2744,8 @@ gamecore.o: ../src/gamecore.cpp ../src/gamecore.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QSize \
 		../src/blueball.h \
 		../src/bouncingspritehandler.h \
-		../src/spritetickhandler.h
+		../src/spritetickhandler.h \
+		../src/playertickhandler.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamecore.o ..\src\gamecore.cpp
 
 resources.o: ../src/resources.cpp ../src/resources.h \

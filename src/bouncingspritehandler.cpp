@@ -71,7 +71,15 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
 
 
         spriteMovement = m_spriteVelocity * elapsedTimeInMilliseconds / 1000.;
+
+        for(int i = 0; i<collidingSprites.size(); i++) {
+            if (collidingSprites.at(i)->data(0).toString() == "bloc-a-detruire") {
+                collidingSprites.at(i)->deleteLater();
+            }
+        }
+
     }
+
 
     m_pParentSprite->setPos(m_pParentSprite->pos() + spriteMovement);
 }
