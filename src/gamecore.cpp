@@ -65,7 +65,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     for (int j=0;j<3;j++) {
 
         for (int i=0;i<18;i++) {
-            // Ajout d'un sprite d'un sprite cube (obstacle à casser)
+            // Ajout d'un sprite d'un sprite cube (obstacle à casser) et lui attribut un "id"
             Sprite* pBlocSprite = new Sprite(GameFramework::imagesPath() + "wall.png");
             m_pScene->addSpriteToScene(pBlocSprite);
             pBlocSprite->setPos(50 + spaceLines, 70 + spaceColumns);
@@ -80,7 +80,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Animations du personnage (rectangle)
     pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
     pSprite->startAnimation(1000);
-
 
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
     // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
@@ -142,12 +141,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     if (isWaiting) {
 
         m_pTennisBall->setPos(m_pPlayer->x() + CENTERING_POS_X_BALL_RESPAWN ,m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
-        m_pTennisBall->unregisterFromTick();
+        //m_pTennisBall->unregisterFromTick();
         // Si 2 secondes se sont passées, et si l'utilisateur appuie sur Espace
         // la balle continue sa trajectoire normalement
         qDebug() << "Code avant test";
         if (m_keySpacePressed) {
-            m_pTennisBall->registerForTick();
+            //m_pTennisBall->registerForTick();
             qDebug() << "Code execute";
             // réinitialise les valeurs
             isWaiting = false;
@@ -156,8 +155,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             qDebug() << "Code execute apres register";
         }
     }
-
-    //PlayerTickHandler();
 
 
     //m_pPlayer->setX(m_pPlayer->x());
@@ -216,6 +213,8 @@ void GameCore::setupBouncingArea() {
     m_pTennisBall->setTickHandler(new BouncingSpriteHandler);
     m_pTennisBall->setPos(0,0);
     m_pScene->addSpriteToScene(m_pTennisBall);
+
+    m_pScene->addText("bonjour");
 
 
     m_pTennisBall->registerForTick();

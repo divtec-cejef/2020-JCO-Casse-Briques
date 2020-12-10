@@ -72,6 +72,7 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
 
         spriteMovement = m_spriteVelocity * elapsedTimeInMilliseconds / 1000.;
 
+        // Parcours la liste et supprime ceux qui sont entrés en collision
         for(int i = 0; i<collidingSprites.size(); i++) {
             if (collidingSprites.at(i)->data(0).toString() == "bloc-a-detruire") {
                 collidingSprites.at(i)->deleteLater();
