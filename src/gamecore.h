@@ -1,8 +1,8 @@
 /**
   \file
   \brief    Déclaration de la classe GameCore.
-  \author   JCO
-  \date     septembre 2018
+  \author   RBR
+  \date     décembre 2020
 */
 #ifndef GAMECORE_H
 #define GAMECORE_H
@@ -55,9 +55,10 @@ private:
     Sprite* m_pTennisBall = nullptr;
     bool m_keySpacePressed = false;;
     bool isWaiting = false;
-    int playerLife = 5;
-    int playerLifeCompare = 5;
-
+    bool isLiving = false;
+    int playerLife = 3;
+    int spaceLines = 0;
+    int spaceColumns = 0;
 
 
 private slots:

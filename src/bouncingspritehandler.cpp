@@ -1,17 +1,15 @@
 /**
   \file
   \brief    Définition de la classe BouncingSpriteHandler.
-  \author   JCO
-  \date     septembre 2018
+  \author   RBR
+  \date     décembre 2020
 */
 #include "bouncingspritehandler.h"
-
 #include "sprite.h"
 #include "gamescene.h"
 
 #include <QDebug>
 #include <cmath>
-
 
 
 //! Constructeur.
@@ -36,7 +34,7 @@ void BouncingSpriteHandler::setSpriteVelocity(double xVelocity, double yVelocity
 //! Cadence : détermine le mouvement que fait le sprite durant le temps écoulé,
 //! vérifie si il doit rebondir et le positionne à son nouvel emplacement.
 void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
-    QPointF spriteMovement = m_spriteVelocity ;
+    QPointF spriteMovement = m_spriteVelocity * elapsedTimeInMilliseconds / 1000.;
 
     // Détermine la prochaine position du sprite
     QRectF nextSpriteRect = m_pParentSprite->globalBoundingBox().translated(spriteMovement);
@@ -71,7 +69,7 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
             m_spriteVelocity.setY(ballFromTop ? -initialVelocity : initialVelocity);
 
 
-        spriteMovement = m_spriteVelocity ;
+        spriteMovement = m_spriteVelocity * elapsedTimeInMilliseconds / 1000.;
 
         // Parcours la liste et supprime ceux qui sont entrés en collision
         for(int i = 0; i<collidingSprites.size(); i++) {

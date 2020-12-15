@@ -1,8 +1,8 @@
 /**
   \file
   \brief    Déclaration de la classe GameScene.
-  \author   JCO
-  \date     janvier 2014
+  \author   RBR
+  \date     décembre 2020
 */
 #ifndef GAMESCENE_H
 #define GAMESCENE_H

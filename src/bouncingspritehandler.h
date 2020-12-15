@@ -1,8 +1,8 @@
 /**
   \file
   \brief    Déclaration de la classe BouncingSpriteHandler.
-  \author   JCO
-  \date     septembre 2018
+  \author   RBR
+  \date     décembre 2020
 */
 #ifndef BOUNCINGSPRITEHANDLER_H
 #define BOUNCINGSPRITEHANDLER_H
@@ -26,7 +26,7 @@ public:
 
 private:
     QPointF m_spriteVelocity;
-    int initialVelocity= 200;
+    int initialVelocity= 100;
 
 };
 

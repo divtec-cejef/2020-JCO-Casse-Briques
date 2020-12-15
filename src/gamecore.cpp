@@ -1,8 +1,8 @@
 /**
   Fichier qui contient toute la logique du jeu.
   
-  @author   JCO
-  @date     Février 2014
+  @author   RBR
+  @date     décembre 2020
  */
 #include "gamecore.h"
 #include "sprite.h"
@@ -13,6 +13,7 @@
 #include <QSettings>
 #include <QPainter>
 #include <QString>
+#include <QColor>
 
 #include "gamescene.h"
 #include "gamecanvas.h"
@@ -24,13 +25,11 @@
 
 
 const int SCENE_WIDTH = 1280;
-const int PLAYER_SPEED = 200;
-const int WAITING_VALUE_IN_MS = 4000;
 const int CENTERING_POS_X_BALL_RESPAWN = 15;
 const int CENTERING_POS_Y_BALL_RESPAWN = 40;
-const QPointF BOUNCING_AREA_POS(700,300);
+const int BRICK_SIZE = 15;
 const float BOUNCING_AREA_SIZE = 86.5;
-const QPointF QPOINT_CENTER_TEXT(500,500);
+const QPointF QPOINT_CENTER_TEXT(400,300);
 
 
 Sprite* m_pPlayer;
@@ -47,24 +46,20 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     pGameCanvas->setCurrentScene(m_pScene);
     
     // Trace un rectangle blanc tout autour des limites de la scène.
-    m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::white));
+    m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::blue));
     
     // Instancier et initialiser les sprite ici :
 
     // Création de la zone de rebond
     setupBouncingArea();
 
-    // Ajout d'un sprite du joueur (rectangle)
+    // Ajout du sprite joueur (le pad, le rectangle)
     Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "rectangle2.png");
     m_pScene->addSpriteToScene(pSprite);
     pSprite->setPos(m_pScene->width()/2.00, 650);
     m_pPlayer = pSprite;
 
-
-    int spaceLines = 0;
-    int spaceColumns = 0;
-
-    // Ajout des blocs (18x3)
+    // Création des blocs (18x3)
     for (int j=0;j<3;j++) {
 
         for (int i=0;i<18;i++) {
@@ -75,6 +70,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
             spaceLines += 65;
             pBlocSprite->setData(0,"bloc-a-detruire");
         }
+        // Réinitialise les valeurs et ajoutes une marge de 65 pour l'espacement des blocs.
         spaceLines = 0;
         spaceColumns += 65;
     }
@@ -84,6 +80,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
     pSprite->startAnimation(1000);
 
+    // Positionne la boule sur le rectangle et attend l'intéraction (espace) de l'utilisateur.
     isWaiting = true;
 
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
@@ -141,13 +138,14 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
+
     //qDebug() << "Valeur Y " << m_pTennisBall->y() << "| Valeur X : " << m_pTennisBall->x();
     // Test si la balle dépasse la valeur du mur du bas
     if (m_pTennisBall->y() >= 685) {
         isWaiting = true;
         m_pTennisBall->unregisterFromTick();
-        playerLifeCompare = playerLife;
         playerLife--;
+        isLiving = true;
     }
 
     // Bloque la balle au centre du rectangle pendant 2 secondes.
@@ -155,7 +153,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
         m_pTennisBall->setPos(m_pPlayer->x() + CENTERING_POS_X_BALL_RESPAWN ,m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
         static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(200,200);
-        //m_pTennisBall->unregisterFromTick();
         // Si 2 secondes se sont passées, et si l'utilisateur appuie sur Espace
         // la balle continue sa trajectoire normalement
         if (m_keySpacePressed) {
@@ -165,16 +162,20 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             isWaiting = false;
         }
     }
+    //QString texte = "Texte à afficher" << playerLife;
 
-    if (playerLife < playerLifeCompare) {
-        m_pScene->createText(QPOINT_CENTER_TEXT,"Vous avez encore : ",60);
+    // Affiche le nombre de vie restant du joueur.
+    if (isLiving) {
+        m_pScene->createText(QPOINT_CENTER_TEXT,"  Vous avez encore :  " + playerLife,80);
+
+        // Fin de partie pour le joueur, il a utilisé toutes ses vies.
         if (playerLife == 0) {
             m_pScene->createText(QPOINT_CENTER_TEXT,"Game Over !",100);
-            m_pScene->removeSpriteFromScene(m_pTennisBall);
-            playerLife = 10;
+            m_pGameCanvas->stopTick();
+            isLiving = false;
         }
     }
-
+    isLiving = false;
 }
 
 //! La souris a été déplacée.
@@ -197,7 +198,6 @@ void GameCore::mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons butto
 
 //! Construit la zone de rebond, ainsi que la balle de tennis qui va s'y déplacer.
 void GameCore::setupBouncingArea() {
-    const int BRICK_SIZE = 15;
 
     // Création des briques de délimitation de la zone et placement
     QPixmap smallBrick(GameFramework::imagesPath() + "wall.png");
@@ -215,21 +215,20 @@ void GameCore::setupBouncingArea() {
     for (int col = 0; col < BOUNCING_AREA_SIZE - 38; col++)
         painterVW.drawPixmap(0, col * BRICK_SIZE, smallBrick);
 
-    // Ajout de 4 sprites (utilisant les murs horizontaux et verticaux) pour délimiter
+    // Ajout de 3 sprites (utilisant les murs horizontaux et verticaux) pour délimiter
     // une zone de rebond.
     m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 0);
-    //m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 720);
 
     m_pScene->addSpriteToScene(new Sprite(verticalWall), -15, 0);
     m_pScene->addSpriteToScene(new Sprite(verticalWall), 1281, 0);
 
-    m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::red));
+    m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::black));
 
     // Création de la balle de tennis qui rebondi
     m_pTennisBall = new Sprite(GameFramework::imagesPath() + "basket.png");
     m_pTennisBall->setTickHandler(new BouncingSpriteHandler);
-    m_pTennisBall->setPos(0,0);
     m_pScene->addSpriteToScene(m_pTennisBall);
 
     m_pTennisBall->registerForTick();
+
 }
