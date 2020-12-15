@@ -26,6 +26,7 @@ public:
 
 private:
     QPointF m_spriteVelocity;
+    int initialVelocity= 200;
 
 };
 

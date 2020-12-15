@@ -45,16 +45,20 @@ signals:
     void notifyKeyReleased(int key);
 
 private:
-    GameCanvas* m_pGameCanvas;
-    GameScene* m_pScene;
-    Sprite* m_pPlayer;
-    Sprite* m_pBloc;
+    GameCanvas* m_pGameCanvas = nullptr;
+    GameScene* m_pScene = nullptr;
+    Sprite* m_pPlayer = nullptr;
+    Sprite* m_pBloc = nullptr;
     int m_PlayerDirection = 1;
     void setupBlueBall();
     void setupBouncingArea();
-    Sprite* m_pTennisBall;
-    bool m_keySpacePressed;
+    Sprite* m_pTennisBall = nullptr;
+    bool m_keySpacePressed = false;;
     bool isWaiting = false;
+    int playerLife = 5;
+    int playerLifeCompare = 5;
+
+
 
 private slots:
 

@@ -12,12 +12,12 @@
 #include <QDebug>
 #include <cmath>
 
-const int INITIAL_VELOCITY = 200;
+
 
 //! Constructeur.
 //! \param pParentSprite Sprite dont le déplacement doit être géré.
 BouncingSpriteHandler::BouncingSpriteHandler(Sprite* pParentSprite) : SpriteTickHandler (pParentSprite) {
-    setSpriteVelocity(INITIAL_VELOCITY ,INITIAL_VELOCITY);
+    setSpriteVelocity(initialVelocity ,initialVelocity);
 }
 
 //! Change le vecteur de vitesse de déplacement du sprite.
@@ -36,7 +36,7 @@ void BouncingSpriteHandler::setSpriteVelocity(double xVelocity, double yVelocity
 //! Cadence : détermine le mouvement que fait le sprite durant le temps écoulé,
 //! vérifie si il doit rebondir et le positionne à son nouvel emplacement.
 void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
-    QPointF spriteMovement = m_spriteVelocity * elapsedTimeInMilliseconds / 1000.;
+    QPointF spriteMovement = m_spriteVelocity ;
 
     // Détermine la prochaine position du sprite
     QRectF nextSpriteRect = m_pParentSprite->globalBoundingBox().translated(spriteMovement);
@@ -48,6 +48,7 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
     collidingSprites.removeAll(m_pParentSprite);
 
     if (!collidingSprites.isEmpty())  {
+
         // On ne considère que la première collision (au cas où il y en aurait plusieurs)
         Sprite* pCollidingSprite = collidingSprites[0];
 
@@ -67,15 +68,16 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
         if(std::abs(minOverlapX) < std::abs(minOverlapY))
             m_spriteVelocity.setX(ballFromLeft ? -200 : 200);
         else
-            m_spriteVelocity.setY(ballFromTop ? -INITIAL_VELOCITY : INITIAL_VELOCITY);
+            m_spriteVelocity.setY(ballFromTop ? -initialVelocity : initialVelocity);
 
 
-        spriteMovement = m_spriteVelocity * elapsedTimeInMilliseconds / 1000.;
+        spriteMovement = m_spriteVelocity ;
 
         // Parcours la liste et supprime ceux qui sont entrés en collision
         for(int i = 0; i<collidingSprites.size(); i++) {
             if (collidingSprites.at(i)->data(0).toString() == "bloc-a-detruire") {
                 collidingSprites.at(i)->deleteLater();
+                initialVelocity += 10;
             }
         }
 

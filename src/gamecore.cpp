@@ -12,6 +12,7 @@
 #include <QDebug>
 #include <QSettings>
 #include <QPainter>
+#include <QString>
 
 #include "gamescene.h"
 #include "gamecanvas.h"
@@ -21,13 +22,15 @@
 #include "bouncingspritehandler.h"
 #include "playertickhandler.h"
 
+
 const int SCENE_WIDTH = 1280;
-const int PLAYER_SPEED = 150;
+const int PLAYER_SPEED = 200;
 const int WAITING_VALUE_IN_MS = 4000;
 const int CENTERING_POS_X_BALL_RESPAWN = 15;
 const int CENTERING_POS_Y_BALL_RESPAWN = 40;
 const QPointF BOUNCING_AREA_POS(700,300);
 const float BOUNCING_AREA_SIZE = 86.5;
+const QPointF QPOINT_CENTER_TEXT(500,500);
 
 
 Sprite* m_pPlayer;
@@ -81,6 +84,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
     pSprite->startAnimation(1000);
 
+    isWaiting = true;
+
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
     // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
     // sinon le temps passé jusqu'au premier tick (ElapsedTime) peut être élevé et provoquer de gros
@@ -111,8 +116,9 @@ void GameCore::keyPressed(int key) {
         if(m_pPlayer->right() < m_pScene->width() - 10)
             m_pPlayer->setX(m_pPlayer->x() + 20); break;
 
-    case Qt::Key_Space: m_keySpacePressed = true;
-        isWaiting = false; break;
+    case Qt::Key_Space:
+        m_keySpacePressed = true;
+        break;
     }
 }
 
@@ -121,6 +127,13 @@ void GameCore::keyPressed(int key) {
 void GameCore::keyReleased(int key) {
     emit notifyKeyReleased(key);
 
+    switch(key) {
+
+    case Qt::Key_Space:
+        m_keySpacePressed = false;
+        break;
+    }
+
 }
 
 //! Cadence.
@@ -128,36 +141,40 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
-    qDebug() << "Valeur Y " << m_pTennisBall->y() << "| Valeur X : " << m_pTennisBall->x();
+    //qDebug() << "Valeur Y " << m_pTennisBall->y() << "| Valeur X : " << m_pTennisBall->x();
     // Test si la balle dépasse la valeur du mur du bas
     if (m_pTennisBall->y() >= 685) {
-        qDebug() << "Valeur X dans test" << m_pTennisBall->x();
-        qDebug() << "Valeur Y dans test " << m_pTennisBall->y();
         isWaiting = true;
-
+        m_pTennisBall->unregisterFromTick();
+        playerLifeCompare = playerLife;
+        playerLife--;
     }
 
     // Bloque la balle au centre du rectangle pendant 2 secondes.
     if (isWaiting) {
 
         m_pTennisBall->setPos(m_pPlayer->x() + CENTERING_POS_X_BALL_RESPAWN ,m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
+        static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(200,200);
         //m_pTennisBall->unregisterFromTick();
         // Si 2 secondes se sont passées, et si l'utilisateur appuie sur Espace
         // la balle continue sa trajectoire normalement
-        qDebug() << "Code avant test";
         if (m_keySpacePressed) {
-            //m_pTennisBall->registerForTick();
-            qDebug() << "Code execute";
+
+            m_pTennisBall->registerForTick();
             // réinitialise les valeurs
             isWaiting = false;
-            m_keySpacePressed = false;
-
-            qDebug() << "Code execute apres register";
         }
     }
 
+    if (playerLife < playerLifeCompare) {
+        m_pScene->createText(QPOINT_CENTER_TEXT,"Vous avez encore : ",60);
+        if (playerLife == 0) {
+            m_pScene->createText(QPOINT_CENTER_TEXT,"Game Over !",100);
+            m_pScene->removeSpriteFromScene(m_pTennisBall);
+            playerLife = 10;
+        }
+    }
 
-    //m_pPlayer->setX(m_pPlayer->x());
 }
 
 //! La souris a été déplacée.
@@ -201,7 +218,7 @@ void GameCore::setupBouncingArea() {
     // Ajout de 4 sprites (utilisant les murs horizontaux et verticaux) pour délimiter
     // une zone de rebond.
     m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 0);
-    m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 720);
+    //m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 720);
 
     m_pScene->addSpriteToScene(new Sprite(verticalWall), -15, 0);
     m_pScene->addSpriteToScene(new Sprite(verticalWall), 1281, 0);
@@ -213,9 +230,6 @@ void GameCore::setupBouncingArea() {
     m_pTennisBall->setTickHandler(new BouncingSpriteHandler);
     m_pTennisBall->setPos(0,0);
     m_pScene->addSpriteToScene(m_pTennisBall);
-
-    m_pScene->addText("bonjour");
-
 
     m_pTennisBall->registerForTick();
 }
