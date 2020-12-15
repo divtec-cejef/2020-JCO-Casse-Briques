@@ -153,20 +153,22 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
         m_pTennisBall->setPos(m_pPlayer->x() + CENTERING_POS_X_BALL_RESPAWN ,m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
         static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(200,200);
-        // Si 2 secondes se sont passées, et si l'utilisateur appuie sur Espace
+        // Si l'utilisateur appuie sur Espace
         // la balle continue sa trajectoire normalement
         if (m_keySpacePressed) {
-
-            m_pTennisBall->registerForTick();
             // réinitialise les valeurs
+            m_pTennisBall->registerForTick();
             isWaiting = false;
         }
     }
-    //QString texte = "Texte à afficher" << playerLife;
+
 
     // Affiche le nombre de vie restant du joueur.
     if (isLiving) {
-        m_pScene->createText(QPOINT_CENTER_TEXT,"  Vous avez encore :  " + playerLife,80);
+        QGraphicsSimpleTextItem* pText = m_pScene->createText(QPointF(300,600), "Vous avez encore : ", 70);
+        pText->setOpacity(0.5);
+
+        //m_pScene->createText(QPOINT_CENTER_TEXT,"  Vous avez encore :  " + playerLife,80);
 
         // Fin de partie pour le joueur, il a utilisé toutes ses vies.
         if (playerLife == 0) {
