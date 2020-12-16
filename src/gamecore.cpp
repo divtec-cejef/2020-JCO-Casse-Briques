@@ -7,8 +7,6 @@
 #include "gamecore.h"
 #include "sprite.h"
 
-#include <cmath>
-
 #include <QDebug>
 #include <QSettings>
 #include <QPainter>
@@ -22,12 +20,14 @@
 #include "blueball.h"
 #include "bouncingspritehandler.h"
 #include "playertickhandler.h"
+#include "bouncingspritehandler.h"
 
 
 const int SCENE_WIDTH = 1280;
 const int CENTERING_POS_X_BALL_RESPAWN = 15;
 const int CENTERING_POS_Y_BALL_RESPAWN = 40;
 const int BRICK_SIZE = 15;
+const int TOTAL_BLOCKS = 54;
 const float BOUNCING_AREA_SIZE = 86.5;
 const QPointF QPOINT_CENTER_TEXT(400,300);
 
@@ -44,9 +44,12 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Créé la scène de base et indique au canvas qu'il faut l'afficher.
     m_pScene = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
     pGameCanvas->setCurrentScene(m_pScene);
+
+    // Crée la scène 2
+    m_pSceneMenu = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
     
     // Trace un rectangle blanc tout autour des limites de la scène.
-    m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::blue));
+    m_pSceneMenu->addRect(m_pSceneMenu->sceneRect(), QPen(Qt::blue));
     
     // Instancier et initialiser les sprite ici :
 
@@ -69,6 +72,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
             pBlocSprite->setPos(50 + spaceLines, 70 + spaceColumns);
             spaceLines += 65;
             pBlocSprite->setData(0,"bloc-a-detruire");
+            connect(pBlocSprite, &Sprite::destroyed, this, &GameCore::onSpriteDestroyed);
         }
         // Réinitialise les valeurs et ajoutes une marge de 65 pour l'espacement des blocs.
         spaceLines = 0;
@@ -116,6 +120,9 @@ void GameCore::keyPressed(int key) {
     case Qt::Key_Space:
         m_keySpacePressed = true;
         break;
+    case Qt::Key_Escape:
+        m_keyEscPressed = true;
+        break;
     }
 }
 
@@ -138,14 +145,13 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
-
-    //qDebug() << "Valeur Y " << m_pTennisBall->y() << "| Valeur X : " << m_pTennisBall->x();
+    qDebug() << counterBlock;
     // Test si la balle dépasse la valeur du mur du bas
     if (m_pTennisBall->y() >= 685) {
         isWaiting = true;
         m_pTennisBall->unregisterFromTick();
         playerLife--;
-        isLiving = true;
+        isDead = true;
     }
 
     // Bloque la balle au centre du rectangle pendant 2 secondes.
@@ -156,28 +162,49 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         // Si l'utilisateur appuie sur Espace
         // la balle continue sa trajectoire normalement
         if (m_keySpacePressed) {
+
             // réinitialise les valeurs
-            m_pTennisBall->registerForTick();
+            //textLifePlayer->hide();
             isWaiting = false;
+            qDebug() << "Avant crash";
+            //textLifePlayer->setOpacity(1);
+            qDebug() << "Apres crash";
+            m_pTennisBall->registerForTick();
         }
     }
 
 
     // Affiche le nombre de vie restant du joueur.
-    if (isLiving) {
-        QGraphicsSimpleTextItem* pText = m_pScene->createText(QPointF(300,600), "Vous avez encore : ", 70);
-        pText->setOpacity(0.5);
-
-        //m_pScene->createText(QPOINT_CENTER_TEXT,"  Vous avez encore :  " + playerLife,80);
+    if (isDead) {
+        if (playerLife >= 2) {
+            textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT,
+                                                                  QString("Il vous reste %1 vies.").arg(playerLife), 100);
+            textLifePlayer->setOpacity(true);
+        } else if (playerLife == 1){
+            textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT,
+                                                                  QString("Il vous reste %1 vie.").arg(playerLife), 110);
+            textLifePlayer->setVisible(true);
+        }
 
         // Fin de partie pour le joueur, il a utilisé toutes ses vies.
         if (playerLife == 0) {
             m_pScene->createText(QPOINT_CENTER_TEXT,"Game Over !",100);
             m_pGameCanvas->stopTick();
-            isLiving = false;
+            isDead = false;
         }
     }
-    isLiving = false;
+
+    isDead = false;
+
+    // Affiche la scène si le joueur a gagné.
+    if (counterBlock == 0) {
+        m_pGameCanvas->setCurrentScene(m_pSceneMenu);
+    }
+
+    // Retour au menu si l'utilisateur presse la touche Esc.
+    if (m_keyEscPressed) {
+        m_pGameCanvas->setCurrentScene(m_pSceneMenu);
+    }
 }
 
 //! La souris a été déplacée.
@@ -233,4 +260,8 @@ void GameCore::setupBouncingArea() {
 
     m_pTennisBall->registerForTick();
 
+}
+
+void GameCore::onSpriteDestroyed(QObject* pSprite) {
+    counterBlock--;
 }

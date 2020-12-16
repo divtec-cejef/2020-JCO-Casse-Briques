@@ -10,6 +10,9 @@
 
 #include <QObject>
 #include <QPointF>
+#include <QString>
+#include <QColor>
+#include <QGraphicsSimpleTextItem>
 
 
 class GameCanvas;
@@ -47,21 +50,27 @@ signals:
 private:
     GameCanvas* m_pGameCanvas = nullptr;
     GameScene* m_pScene = nullptr;
+    GameScene* m_pSceneMenu = nullptr;
     Sprite* m_pPlayer = nullptr;
     Sprite* m_pBloc = nullptr;
     int m_PlayerDirection = 1;
     void setupBlueBall();
     void setupBouncingArea();
     Sprite* m_pTennisBall = nullptr;
-    bool m_keySpacePressed = false;;
+    bool m_keySpacePressed = false;
+    bool m_keyEscPressed = false;
     bool isWaiting = false;
-    bool isLiving = false;
+    bool isDead = false;
     int playerLife = 3;
     int spaceLines = 0;
     int spaceColumns = 0;
+    int counterBlock = 54;
+    QGraphicsSimpleTextItem* textLifePlayer = nullptr;
+
 
 
 private slots:
+    void onSpriteDestroyed(QObject* pSprite);
 
 };
 

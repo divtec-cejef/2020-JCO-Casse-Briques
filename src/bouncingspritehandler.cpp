@@ -1,4 +1,4 @@
-/**
+﻿/**
   \file
   \brief    Définition de la classe BouncingSpriteHandler.
   \author   RBR
@@ -7,6 +7,7 @@
 #include "bouncingspritehandler.h"
 #include "sprite.h"
 #include "gamescene.h"
+#include "gamecore.h"
 
 #include <QDebug>
 #include <cmath>
