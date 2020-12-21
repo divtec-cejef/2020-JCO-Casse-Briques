@@ -76,7 +76,7 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
         for(int i = 0; i<collidingSprites.size(); i++) {
             if (collidingSprites.at(i)->data(0).toString() == "bloc-a-detruire") {
                 collidingSprites.at(i)->deleteLater();
-                initialVelocity += 10;
+                initialVelocity += 5;
             }
         }
 

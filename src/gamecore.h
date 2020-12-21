@@ -51,6 +51,8 @@ private:
     GameCanvas* m_pGameCanvas = nullptr;
     GameScene* m_pScene = nullptr;
     GameScene* m_pSceneMenu = nullptr;
+    GameScene* m_pSceneWin = nullptr;
+    GameScene* m_pSceneLoss = nullptr;
     Sprite* m_pPlayer = nullptr;
     Sprite* m_pBloc = nullptr;
     int m_PlayerDirection = 1;

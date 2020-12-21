@@ -27,9 +27,9 @@ const int SCENE_WIDTH = 1280;
 const int CENTERING_POS_X_BALL_RESPAWN = 15;
 const int CENTERING_POS_Y_BALL_RESPAWN = 40;
 const int BRICK_SIZE = 15;
-const int TOTAL_BLOCKS = 54;
 const float BOUNCING_AREA_SIZE = 86.5;
 const QPointF QPOINT_CENTER_TEXT(400,300);
+const QPointF QPOINT_CENTER_UNDER_TEXT(250,450);
 
 
 Sprite* m_pPlayer;
@@ -45,8 +45,14 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pScene = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
     pGameCanvas->setCurrentScene(m_pScene);
 
-    // Crée la scène 2
+    // Création scène menu
     m_pSceneMenu = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+
+    // Création scène gagnante
+    m_pSceneWin = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+
+    // Création scène perdante
+    m_pSceneLoss = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
     
     // Trace un rectangle blanc tout autour des limites de la scène.
     m_pSceneMenu->addRect(m_pSceneMenu->sceneRect(), QPen(Qt::blue));
@@ -188,8 +194,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 
         // Fin de partie pour le joueur, il a utilisé toutes ses vies.
         if (playerLife == 0) {
-            m_pScene->createText(QPOINT_CENTER_TEXT,"Game Over !",100);
-            m_pGameCanvas->stopTick();
+            m_pGameCanvas->setCurrentScene(m_pSceneLoss);
+            m_pSceneLoss->createText(QPOINT_CENTER_TEXT,"Game Over !",100);
+            m_pSceneLoss->createText(QPOINT_CENTER_UNDER_TEXT,"Appuyez sur ESC pour retourner au menu",50);
             isDead = false;
         }
     }
@@ -197,8 +204,9 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     isDead = false;
 
     // Affiche la scène si le joueur a gagné.
-    if (counterBlock == 0) {
-        m_pGameCanvas->setCurrentScene(m_pSceneMenu);
+    if (counterBlock == 0 ) {
+        m_pGameCanvas->setCurrentScene(m_pSceneWin);
+        m_pSceneWin->createText(QPOINT_CENTER_TEXT,"BRAVO ! Vous avez gagné ",60);
     }
 
     // Retour au menu si l'utilisateur presse la touche Esc.
