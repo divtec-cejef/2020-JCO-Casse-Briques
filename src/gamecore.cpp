@@ -28,6 +28,7 @@ const int CENTERING_POS_X_BALL_RESPAWN = 15;
 const int CENTERING_POS_Y_BALL_RESPAWN = 40;
 const int BRICK_SIZE = 15;
 const float BOUNCING_AREA_SIZE = 86.5;
+const QPointF QPOINT_CENTER_TEXT_LIFE(250,400);
 const QPointF QPOINT_CENTER_TEXT(400,300);
 const QPointF QPOINT_CENTER_UNDER_TEXT(250,450);
 
@@ -117,11 +118,11 @@ void GameCore::keyPressed(int key) {
     switch(key) {
     case Qt::Key_Left:
         if(m_pPlayer->left())
-            m_pPlayer->setX(m_pPlayer->x() - 20); break;
+            m_pPlayer->setX(m_pPlayer->x() - 40); break;
 
     case Qt::Key_Right:
         if(m_pPlayer->right() < m_pScene->width() - 10)
-            m_pPlayer->setX(m_pPlayer->x() + 20); break;
+            m_pPlayer->setX(m_pPlayer->x() + 40); break;
 
     case Qt::Key_Space:
         m_keySpacePressed = true;
@@ -180,10 +181,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     // Affiche le nombre de vie restant du joueur.
     if (isDead) {
         if (playerLife >= 2) {
-            textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT,
+            textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT_LIFE,
                                                   QString("Il vous reste %1 vies.").arg(playerLife), 100);
         } else if (playerLife == 1){
-            textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT,
+            textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT_LIFE,
                                                   QString("Il vous reste %1 vie.").arg(playerLife), 110);
         }
 
