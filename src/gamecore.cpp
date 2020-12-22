@@ -151,7 +151,6 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
 
-    qDebug() << counterBlock;
     // Test si la balle dépasse la valeur du mur du bas
     if (m_pTennisBall->y() >= 685) {
         isWaiting = true;
@@ -169,12 +168,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         // la balle continue sa trajectoire normalement
         if (m_keySpacePressed) {
 
-            // réinitialise les valeurs
-            //textLifePlayer->hide();
+            // Supprime le texte, réinitialise les valeurs et redémarre le tick
+            delete textLifePlayer;
+            textLifePlayer = nullptr;
             isWaiting = false;
-            qDebug() << "Avant crash";
-            //textLifePlayer->setOpacity(1);
-            qDebug() << "Apres crash";
             m_pTennisBall->registerForTick();
         }
     }
@@ -184,18 +181,16 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     if (isDead) {
         if (playerLife >= 2) {
             textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT,
-                                                                  QString("Il vous reste %1 vies.").arg(playerLife), 100);
-            textLifePlayer->setOpacity(true);
+                                                  QString("Il vous reste %1 vies.").arg(playerLife), 100);
         } else if (playerLife == 1){
             textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT,
-                                                                  QString("Il vous reste %1 vie.").arg(playerLife), 110);
-            textLifePlayer->setVisible(true);
+                                                  QString("Il vous reste %1 vie.").arg(playerLife), 110);
         }
 
         // Fin de partie pour le joueur, il a utilisé toutes ses vies.
         if (playerLife == 0) {
             m_pGameCanvas->setCurrentScene(m_pSceneLoss);
-            m_pSceneLoss->createText(QPOINT_CENTER_TEXT,"Game Over !",100);
+            m_pSceneLoss->createText(QPOINT_CENTER_TEXT,"Game Over !",100, couleurGameOver);
             m_pSceneLoss->createText(QPOINT_CENTER_UNDER_TEXT,"Appuyez sur ESC pour retourner au menu",50);
             isDead = false;
         }
@@ -206,7 +201,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     // Affiche la scène si le joueur a gagné.
     if (counterBlock == 0 ) {
         m_pGameCanvas->setCurrentScene(m_pSceneWin);
-        m_pSceneWin->createText(QPOINT_CENTER_TEXT,"BRAVO ! Vous avez gagné ",60);
+        m_pSceneWin->createText(QPOINT_CENTER_TEXT,"BRAVO ! Vous avez gagné",50, couleurGameWin);
     }
 
     // Retour au menu si l'utilisateur presse la touche Esc.

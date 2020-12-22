@@ -67,6 +67,8 @@ private:
     int spaceLines = 0;
     int spaceColumns = 0;
     int counterBlock = 54;
+    QColor couleurGameOver = QColor(255,0,0);
+    QColor couleurGameWin = QColor(0,255,0);
     QGraphicsSimpleTextItem* textLifePlayer = nullptr;
 
 
