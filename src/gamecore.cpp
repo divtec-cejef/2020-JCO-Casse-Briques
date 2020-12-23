@@ -24,9 +24,11 @@
 
 
 const int SCENE_WIDTH = 1280;
-const int CENTERING_POS_X_BALL_RESPAWN = 15;
+const int CENTERING_POS_X_BALL_RESPAWN = 20;
 const int CENTERING_POS_Y_BALL_RESPAWN = 40;
 const int BRICK_SIZE = 15;
+const int MIN_VALUE_WALL = 32;
+const int MAX_VALUE_WALL = 1250;
 const float BOUNCING_AREA_SIZE = 86.5;
 const QPointF QPOINT_CENTER_TEXT_LIFE(250,400);
 const QPointF QPOINT_CENTER_TEXT(400,300);
@@ -41,13 +43,14 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Mémorise l'accès au canvas (qui gère le tick et l'affichage d'une scène)
     m_pGameCanvas = pGameCanvas;
-    
+
     // Créé la scène de base et indique au canvas qu'il faut l'afficher.
     m_pScene = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
     pGameCanvas->setCurrentScene(m_pScene);
 
     // Création scène menu
     m_pSceneMenu = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+    m_pSceneMenu->createText(QPOINT_CENTER_TEXT,"Menu du jeu",100, couleurGameOver);
 
     // Création scène gagnante
     m_pSceneWin = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
@@ -160,19 +163,20 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         isDead = true;
     }
 
-    // Bloque la balle au centre du rectangle pendant 2 secondes.
+    // Bloque la balle au centre du rectangle tant que l'utilisateur ne clique pas espace ou sur sa souris
     if (isWaiting) {
 
-        m_pTennisBall->setPos(m_pPlayer->x() + CENTERING_POS_X_BALL_RESPAWN ,m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
-        static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(200,200);
-        // Si l'utilisateur appuie sur Espace
+        m_pTennisBall->setPos(m_pPlayer->x() - CENTERING_POS_X_BALL_RESPAWN, m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
+        static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(100,100);
+        // Si l'utilisateur appuie sur Espace ou effectue un clic avec la souris
         // la balle continue sa trajectoire normalement
-        if (m_keySpacePressed) {
+        if (m_keySpacePressed || onClick) {
 
             // Supprime le texte, réinitialise les valeurs et redémarre le tick
             delete textLifePlayer;
             textLifePlayer = nullptr;
             isWaiting = false;
+            onClick = false;
             m_pTennisBall->registerForTick();
         }
     }
@@ -193,7 +197,6 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             m_pGameCanvas->setCurrentScene(m_pSceneLoss);
             m_pSceneLoss->createText(QPOINT_CENTER_TEXT,"Game Over !",100, couleurGameOver);
             m_pSceneLoss->createText(QPOINT_CENTER_UNDER_TEXT,"Appuyez sur ESC pour retourner au menu",50);
-            isDead = false;
         }
     }
 
@@ -203,12 +206,20 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     if (counterBlock == 0 ) {
         m_pGameCanvas->setCurrentScene(m_pSceneWin);
         m_pSceneWin->createText(QPOINT_CENTER_TEXT,"BRAVO ! Vous avez gagné",50, couleurGameWin);
+        m_pSceneWin->createText(QPOINT_CENTER_UNDER_TEXT,"Appuyez sur ESC pour retourner au menu",50);
     }
 
     // Retour au menu si l'utilisateur presse la touche Esc.
     if (m_keyEscPressed) {
         m_pGameCanvas->setCurrentScene(m_pSceneMenu);
     }
+
+    // Si le pad sort des limites, le repositionne à l'intérieur
+    if (m_pPlayer->x() <= MIN_VALUE_WALL) {
+        m_pPlayer->setX(MIN_VALUE_WALL);
+    } else if (m_pPlayer->x() >= MAX_VALUE_WALL)
+        m_pPlayer->setX(MAX_VALUE_WALL);
+
 }
 
 //! La souris a été déplacée.
@@ -216,11 +227,19 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
 //! doit être enclenchée avec GameCanvas::startMouseTracking().
 void GameCore::mouseMoved(QPointF newMousePosition) {
     emit notifyMouseMoved(newMousePosition);
+
+    // Fais en sorte que le pad ne puisse pas sortir des zones de collisions
+    if (newMousePosition.x() >= MIN_VALUE_WALL && newMousePosition.x() <= MAX_VALUE_WALL) {
+        m_pPlayer->setX(newMousePosition.x());
+        m_pPlayer->setOffset(-m_pPlayer->boundingRect().width()/2, -m_pPlayer->boundingRect().height()/2);
+    }
 }
 
 //! Traite l'appui sur un bouton de la souris.
 void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons) {
     emit notifyMouseButtonPressed(mousePosition, buttons);
+    //m_pScene->spriteAt(mousePosition);
+    onClick = true;
 }
 
 //! Traite le relâchement d'un bouton de la souris.
@@ -258,7 +277,7 @@ void GameCore::setupBouncingArea() {
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::black));
 
     // Création de la balle de tennis qui rebondi
-    m_pTennisBall = new Sprite(GameFramework::imagesPath() + "basket.png");
+    m_pTennisBall = new Sprite(GameFramework::imagesPath() + "christmasball.png");
     m_pTennisBall->setTickHandler(new BouncingSpriteHandler);
     m_pScene->addSpriteToScene(m_pTennisBall);
 

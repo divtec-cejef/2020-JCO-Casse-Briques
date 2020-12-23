@@ -48,11 +48,12 @@ public:
         label = new QLabel(MainFrm);
         label->setObjectName(QString::fromUtf8("label"));
         QFont font1;
-        font1.setFamily(QString::fromUtf8("8514oem"));
-        font1.setPointSize(8);
-        font1.setBold(true);
+        font1.setFamily(QString::fromUtf8("OCR A Extended"));
+        font1.setPointSize(16);
+        font1.setBold(false);
+        font1.setItalic(false);
         font1.setUnderline(false);
-        font1.setWeight(75);
+        font1.setWeight(50);
         label->setFont(font1);
         label->setScaledContents(false);
         label->setAlignment(Qt::AlignCenter);
@@ -73,7 +74,7 @@ public:
     void retranslateUi(QWidget *MainFrm)
     {
         MainFrm->setWindowTitle(QCoreApplication::translate("MainFrm", "Casse-briques", nullptr));
-        label->setText(QCoreApplication::translate("MainFrm", "Bienvenue sur Casse-Briques !", nullptr));
+        label->setText(QCoreApplication::translate("MainFrm", "Amusez-vous bien et bonne chance | Casse-briques 2020 Broquet Rayan", nullptr));
     } // retranslateUi
 
 };

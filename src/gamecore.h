@@ -63,6 +63,7 @@ private:
     bool m_keyEscPressed = false;
     bool isWaiting = false;
     bool isDead = false;
+    bool onClick = false;
     int playerLife = 3;
     int spaceLines = 0;
     int spaceColumns = 0;

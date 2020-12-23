@@ -9,6 +9,7 @@
 #include "ui_mainfrm.h"
 
 #include "gamecanvas.h"
+#include "gamecore.h"
 
 //! Construit la fenêtre principale.
 MainFrm::MainFrm(QWidget *pParent) : QWidget(pParent), ui(new Ui::MainFrm) {

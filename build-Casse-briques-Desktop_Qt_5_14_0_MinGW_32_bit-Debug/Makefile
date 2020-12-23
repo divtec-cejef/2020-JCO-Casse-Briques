@@ -114,7 +114,6 @@ OBJECTS       = main.o \
 		moc_automaticwalkinghandler.o
 
 DIST          =  ..\src\mainfrm.h \
-		..\src\Enemy.h \
 		..\src\gamescene.h \
 		..\src\keytickhandler.h \
 		..\src\player.h \
@@ -532,7 +531,7 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) CasseBrique.zip $(SOURCES) $(DIST) ..\src\Casse-briques.pro ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\spec_pre.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\qdevice.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\device_config.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\sanitize.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\gcc-base.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\g++-base.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\angle.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\windows-vulkan.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\g++-win32.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\windows-desktop.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\qconfig.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3danimation.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dcore.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dextras.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dinput.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dlogic.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquick.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3drender.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3drender_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axbase.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axserver.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_core.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_core_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_dbus.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_designer.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_edid_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_gamepad.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_gui.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_help.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_help_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_location.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_location_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_network.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_network_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_nfc.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_opengl.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_positioning.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_positioningquick.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_positioningquick_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qml.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quick.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_remoteobjects.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_remoteobjects_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_repparser.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_repparser_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_scxml.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_scxml_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_sensors.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_serialbus.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_serialport.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_sql.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_svg.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_testlib.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_texttospeech.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_texttospeech_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_uitools.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_webchannel.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_websockets.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_widgets.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_winextras.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_xml.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qt_functions.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qt_config.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\win32-g++\qmake.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\exclusive_builds.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\toolchain.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\default_pre.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\win32\default_pre.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\resolve_config.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\default_post.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qml_debug.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\precompile_header.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\warn_on.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qt.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\resources_functions.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\resources.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\moc.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\win32\opengl.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\uic.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qmake_use.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\file_copies.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\win32\windows.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\testcase_targets.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\exceptions.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\yacc.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\lex.prf ..\src\Casse-briques.pro ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\Qt5Svg.prl ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\Qt5Widgets.prl ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\Qt5Gui.prl ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\Qt5Core.prl ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\qtmain.prl    ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\data\dummy.cpp ..\src\mainfrm.h ..\src\Enemy.h ..\src\gamescene.h ..\src\keytickhandler.h ..\src\player.h ..\src\playertickhandler.h ..\src\randommovetickhandler.h ..\src\sprite.h ..\src\gamecore.h ..\src\resources.h ..\src\gameview.h ..\src\utilities.h ..\src\gamecanvas.h ..\src\walkingman.h ..\src\blueball.h ..\src\spinningpinwheel.h ..\src\spritetickhandler.h ..\src\bouncingspritehandler.h ..\src\manualwalkinghandler.h ..\src\automaticwalkinghandler.h  ..\src\main.cpp ..\src\keytickhandler.cpp ..\src\mainfrm.cpp ..\src\gamescene.cpp ..\src\player.cpp ..\src\playertickhandler.cpp ..\src\randommovetickhandler.cpp ..\src\sprite.cpp ..\src\gamecore.cpp ..\src\resources.cpp ..\src\gameview.cpp ..\src\utilities.cpp ..\src\gamecanvas.cpp ..\src\walkingman.cpp ..\src\blueball.cpp ..\src\spinningpinwheel.cpp ..\src\spritetickhandler.cpp ..\src\bouncingspritehandler.cpp ..\src\manualwalkinghandler.cpp ..\src\automaticwalkinghandler.cpp ..\src\mainfrm.ui ..\src\maincb.ui    
+	$(ZIP) CasseBrique.zip $(SOURCES) $(DIST) ..\src\Casse-briques.pro ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\spec_pre.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\qdevice.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\device_config.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\sanitize.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\gcc-base.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\g++-base.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\angle.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\win32\windows_vulkan_sdk.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\windows-vulkan.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\g++-win32.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\common\windows-desktop.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\qconfig.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3danimation.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3danimation_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dcore.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dcore_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dextras.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dextras_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dinput.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dinput_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dlogic.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dlogic_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquick.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquick_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickanimation.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickanimation_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickextras.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickextras_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickinput.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickinput_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickrender.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickrender_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickscene2d.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3dquickscene2d_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3drender.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_3drender_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_accessibility_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axbase.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axserver.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_core.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_core_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_dbus.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_dbus_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_designer.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_devicediscovery_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_edid_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_egl_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_fb_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_fontdatabase_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_gamepad.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_gamepad_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_gui.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_help.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_help_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_location.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_location_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_network.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_network_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_nfc.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_opengl.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_packetprotocol_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_platformcompositor_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_positioning.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_positioningquick.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_positioningquick_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qml.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmldebug_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmlmodels.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmlmodels_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmlworkerscript.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qmlworkerscript_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quick.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickcontrols2.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickcontrols2_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickshapes_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quicktemplates2.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quicktemplates2_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_remoteobjects.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_remoteobjects_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_repparser.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_repparser_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_scxml.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_scxml_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_sensors.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_serialbus.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_serialbus_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_serialport.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_sql.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_svg.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_testlib.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_texttospeech.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_texttospeech_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_theme_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_uiplugin.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_uitools.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_webchannel.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_webchannel_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_websockets.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_widgets.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_winextras.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_xml.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qt_functions.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qt_config.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\win32-g++\qmake.conf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\spec_post.prf .qmake.stash ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\exclusive_builds.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\toolchain.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\default_pre.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\win32\default_pre.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\resolve_config.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\default_post.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qml_debug.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\precompile_header.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\warn_on.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qt.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\resources_functions.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\resources.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\moc.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\win32\opengl.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\uic.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\qmake_use.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\file_copies.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\win32\windows.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\testcase_targets.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\exceptions.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\yacc.prf ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\lex.prf ..\src\Casse-briques.pro ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\Qt5Svg.prl ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\Qt5Widgets.prl ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\Qt5Gui.prl ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\Qt5Core.prl ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\lib\qtmain.prl    ..\..\..\Apps\qtcreator\qt\5.14.0\mingw73_32\mkspecs\features\data\dummy.cpp ..\src\mainfrm.h ..\src\gamescene.h ..\src\keytickhandler.h ..\src\player.h ..\src\playertickhandler.h ..\src\randommovetickhandler.h ..\src\sprite.h ..\src\gamecore.h ..\src\resources.h ..\src\gameview.h ..\src\utilities.h ..\src\gamecanvas.h ..\src\walkingman.h ..\src\blueball.h ..\src\spinningpinwheel.h ..\src\spritetickhandler.h ..\src\bouncingspritehandler.h ..\src\manualwalkinghandler.h ..\src\automaticwalkinghandler.h  ..\src\main.cpp ..\src\keytickhandler.cpp ..\src\mainfrm.cpp ..\src\gamescene.cpp ..\src\player.cpp ..\src\playertickhandler.cpp ..\src\randommovetickhandler.cpp ..\src\sprite.cpp ..\src\gamecore.cpp ..\src\resources.cpp ..\src\gameview.cpp ..\src\utilities.cpp ..\src\gamecanvas.cpp ..\src\walkingman.cpp ..\src\blueball.cpp ..\src\spinningpinwheel.cpp ..\src\spritetickhandler.cpp ..\src\bouncingspritehandler.cpp ..\src\manualwalkinghandler.cpp ..\src\automaticwalkinghandler.cpp ..\src\mainfrm.ui ..\src\maincb.ui    
 
 clean: compiler_clean 
 	-$(DEL_FILE) main.o keytickhandler.o mainfrm.o gamescene.o player.o playertickhandler.o randommovetickhandler.o sprite.o gamecore.o resources.o gameview.o utilities.o gamecanvas.o walkingman.o blueball.o spinningpinwheel.o spritetickhandler.o bouncingspritehandler.o manualwalkinghandler.o automaticwalkinghandler.o moc_mainfrm.o moc_gamescene.o moc_keytickhandler.o moc_player.o moc_sprite.o moc_gamecore.o moc_gamecanvas.o moc_walkingman.o moc_blueball.o moc_spinningpinwheel.o moc_automaticwalkinghandler.o
@@ -1087,6 +1086,45 @@ moc_gamecore.cpp: ../src/gamecore.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qcontainerfwd.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qobject_impl.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QPointF \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QString \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QColor \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qcolor.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtguiglobal.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtgui-config.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgb.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgba64.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsSimpleTextItem \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgets-config.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qvariant.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmap.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qdebug.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qhash.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qtextstream.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qiodevice.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qlocale.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qshareddata.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qset.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qcontiguouscache.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsharedpointer.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsharedpointer_impl.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qrect.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmargins.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsize.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpainterpath.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qmatrix.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpolygon.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qregion.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qwindowdefs.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qwindowdefs_win.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qdatastream.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qline.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixmap.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpaintdevice.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qimage.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixelformat.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtransform.h \
 		moc_predefs.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/bin/moc.exe
 	C:\Apps\qtcreator\qt\5.14.0\mingw73_32\bin\moc.exe $(DEFINES) --include C:/git/2020-JCO-Casse-Briques/build-Casse-briques-Desktop_Qt_5_14_0_MinGW_32_bit-Debug/moc_predefs.h -IC:/Apps/qtcreator/qt/5.14.0/mingw73_32/mkspecs/win32-g++ -IC:/git/2020-JCO-Casse-Briques/src -IC:/Apps/qtcreator/qt/5.14.0/mingw73_32/include -IC:/Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtSvg -IC:/Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets -IC:/Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui -IC:/Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtANGLE -IC:/Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore -I. -IC:/Apps/qtcreator/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++ -IC:/Apps/qtcreator/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32 -IC:/Apps/qtcreator/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/backward -IC:/Apps/qtcreator/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include -IC:/Apps/qtcreator/qt/Tools/mingw730_32/lib/gcc/i686-w64-mingw32/7.3.0/include-fixed -IC:/Apps/qtcreator/qt/Tools/mingw730_32/i686-w64-mingw32/include ..\src\gamecore.h -o moc_gamecore.cpp
@@ -1886,7 +1924,10 @@ keytickhandler.o: ../src/keytickhandler.cpp ../src/keytickhandler.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qbrush.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qfont.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpen.h \
-		../src/gamecore.h
+		../src/gamecore.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QString \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QColor \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsSimpleTextItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o keytickhandler.o ..\src\keytickhandler.cpp
 
 mainfrm.o: ../src/mainfrm.cpp ../src/mainfrm.h \
@@ -1995,6 +2036,35 @@ mainfrm.o: ../src/mainfrm.cpp ../src/mainfrm.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qvector2d.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtouchdevice.h \
 		ui_mainfrm.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QVariant \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QIcon \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qicon.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QApplication \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qapplication.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qcoreapplication.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qeventloop.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qdesktopwidget.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qguiapplication.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qinputmethod.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QLabel \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qlabel.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qframe.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QProgressBar \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qprogressbar.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QVBoxLayout \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qboxlayout.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qlayout.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qlayoutitem.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgridlayout.h \
+		../src/gameview.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsView \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsview.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpainter.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtextoption.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpen.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qscrollarea.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsscene.h \
 		../src/gamecanvas.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QObject \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QPointer \
@@ -2005,7 +2075,13 @@ mainfrm.o: ../src/mainfrm.cpp ../src/mainfrm.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qtimer.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qbasictimer.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QElapsedTimer \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qelapsedtimer.h
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qelapsedtimer.h \
+		../src/gamecore.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QPointF \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QString \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QColor \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsSimpleTextItem \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsitem.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainfrm.o ..\src\mainfrm.cpp
 
 gamescene.o: ../src/gamescene.cpp ../src/gamescene.h \
@@ -2144,11 +2220,13 @@ gamescene.o: ../src/gamescene.cpp ../src/gamescene.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QPen \
 		../src/gamecore.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QPointF \
-		../src/resources.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QString \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QColor \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsSimpleTextItem \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		../src/resources.h \
 		../src/sprite.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsitem.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QPixmap
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamescene.o ..\src\gamescene.cpp
 
@@ -2377,6 +2455,9 @@ playertickhandler.o: ../src/playertickhandler.cpp ../src/playertickhandler.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qfont.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpen.h \
 		../src/gamecore.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QString \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QColor \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsSimpleTextItem \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QDebug \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QSettings \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsettings.h \
@@ -2675,12 +2756,16 @@ gamecore.o: ../src/gamecore.cpp ../src/gamecore.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qcontainerfwd.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qobject_impl.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QPointF \
-		../src/sprite.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsitem.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QString \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QColor \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qcolor.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtguiglobal.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtgui-config.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgb.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgba64.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsSimpleTextItem \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgets-config.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qvariant.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmap.h \
@@ -2707,12 +2792,11 @@ gamecore.o: ../src/gamecore.cpp ../src/gamecore.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qline.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixmap.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpaintdevice.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qcolor.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgb.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgba64.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qimage.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixelformat.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtransform.h \
+		../src/sprite.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsPixmapItem \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QPixmap \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QTimer \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qtimer.h \
@@ -2739,7 +2823,6 @@ gamecore.o: ../src/gamecore.cpp ../src/gamecore.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsScene \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsscene.h \
 		../src/resources.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QString \
 		../src/utilities.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QSize \
 		../src/blueball.h \
@@ -3133,34 +3216,45 @@ gamecanvas.o: ../src/gamecanvas.cpp ../src/gamecanvas.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qelapsedtimer.h \
 		../src/gamecore.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QPointF \
-		../src/gamescene.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsScene \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsscene.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QString \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QColor \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qcolor.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtguiglobal.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtgui-config.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgb.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgba64.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsSimpleTextItem \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsitem.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgetsglobal.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qtwidgets-config.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qvariant.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmap.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qdebug.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qtextstream.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qiodevice.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qlocale.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qset.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qcontiguouscache.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qrect.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmargins.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qsize.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qbrush.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qcolor.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgb.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qrgba64.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpainterpath.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qmatrix.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpolygon.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qregion.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qwindowdefs.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qwindowdefs_win.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qdatastream.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qiodevice.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qline.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtransform.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpainterpath.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qimage.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpaintdevice.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixelformat.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixmap.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpaintdevice.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qimage.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpixelformat.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qtransform.h \
+		../src/gamescene.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsScene \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsscene.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qbrush.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qfont.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpen.h \
 		../src/gameview.h \
@@ -3179,13 +3273,6 @@ gamecanvas.o: ../src/gamecanvas.cpp ../src/gamecanvas.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qcursor.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qkeysequence.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qevent.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qvariant.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qmap.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qdebug.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qtextstream.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qlocale.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qset.h \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qcontiguouscache.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qurl.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qurlquery.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/qfile.h \
@@ -3196,7 +3283,6 @@ gamecanvas.o: ../src/gamecanvas.cpp ../src/gamecanvas.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsSceneMouseEvent \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicssceneevent.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsItem \
-		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/qgraphicsitem.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsTextItem \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QKeyEvent
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gamecanvas.o ..\src\gamecanvas.cpp
@@ -3629,6 +3715,10 @@ bouncingspritehandler.o: ../src/bouncingspritehandler.cpp ../src/bouncingspriteh
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qbrush.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qfont.h \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/qpen.h \
+		../src/gamecore.h \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QString \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtGui/QColor \
+		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtWidgets/QGraphicsSimpleTextItem \
 		../../../Apps/qtcreator/qt/5.14.0/mingw73_32/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bouncingspritehandler.o ..\src\bouncingspritehandler.cpp
 

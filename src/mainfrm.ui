@@ -31,15 +31,16 @@
     <widget class="QLabel" name="label">
      <property name="font">
       <font>
-       <family>8514oem</family>
-       <pointsize>8</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <family>OCR A Extended</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
        <underline>false</underline>
       </font>
      </property>
      <property name="text">
-      <string>Bienvenue sur Casse-Briques !</string>
+      <string>Amusez-vous bien et bonne chance ! Jouable clavier/souris | Casse-briques fait par Broquet Rayan</string>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -50,7 +51,21 @@
     </widget>
    </item>
    <item>
-    <widget class="GameView" name="grvGame"/>
+    <widget class="GameView" name="grvGame">
+     <property name="font">
+      <font>
+       <family>8514oem</family>
+       <pointsize>15</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -38,7 +38,6 @@ SOURCES += main.cpp\
     automaticwalkinghandler.cpp
 
 HEADERS  += mainfrm.h \
-    Enemy.h \
     gamescene.h \
     keytickhandler.h \
     player.h \
