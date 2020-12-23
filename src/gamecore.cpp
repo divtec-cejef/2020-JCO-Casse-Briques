@@ -47,10 +47,16 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Créé la scène de base et indique au canvas qu'il faut l'afficher.
     m_pScene = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
     pGameCanvas->setCurrentScene(m_pScene);
+    m_pScene->setBackgroundColor(colorBackGround);
 
     // Création scène menu
     m_pSceneMenu = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
-    m_pSceneMenu->createText(QPOINT_CENTER_TEXT,"Menu du jeu",100, couleurGameOver);
+
+    // Ajout du background au menu
+    Sprite* pSpriteBackGround = new Sprite(GameFramework::imagesPath() + "backgroundCB.jpg");
+    m_pSceneMenu->addSpriteToScene(pSpriteBackGround);
+    pSpriteBackGround->setPos(-200,-200);
+    m_pSceneMenu->createText(QPOINT_CENTER_TEXT,"Menu du jeu",100, colorGameOver);
 
     // Création scène gagnante
     m_pSceneWin = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
@@ -79,7 +85,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
             // Ajout d'un sprite d'un sprite cube (obstacle à casser) et lui attribut un "id"
             Sprite* pBlocSprite = new Sprite(GameFramework::imagesPath() + "wall.png");
             m_pScene->addSpriteToScene(pBlocSprite);
-            pBlocSprite->setPos(50 + spaceLines, 70 + spaceColumns);
+            pBlocSprite->setPos(50 + spaceLines, 80 + spaceColumns);
             spaceLines += 65;
             pBlocSprite->setData(0,"bloc-a-detruire");
             connect(pBlocSprite, &Sprite::destroyed, this, &GameCore::onSpriteDestroyed);
@@ -154,7 +160,6 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
-
     // Test si la balle dépasse la valeur du mur du bas
     if (m_pTennisBall->y() >= 685) {
         isWaiting = true;
@@ -195,7 +200,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         // Fin de partie pour le joueur, il a utilisé toutes ses vies.
         if (playerLife == 0) {
             m_pGameCanvas->setCurrentScene(m_pSceneLoss);
-            m_pSceneLoss->createText(QPOINT_CENTER_TEXT,"Game Over !",100, couleurGameOver);
+            m_pSceneLoss->createText(QPOINT_CENTER_TEXT,"Game Over !",100, colorGameOver);
             m_pSceneLoss->createText(QPOINT_CENTER_UNDER_TEXT,"Appuyez sur ESC pour retourner au menu",50);
         }
     }
@@ -205,7 +210,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     // Affiche la scène si le joueur a gagné.
     if (counterBlock == 0 ) {
         m_pGameCanvas->setCurrentScene(m_pSceneWin);
-        m_pSceneWin->createText(QPOINT_CENTER_TEXT,"BRAVO ! Vous avez gagné",50, couleurGameWin);
+        m_pSceneWin->createText(QPOINT_CENTER_TEXT,"BRAVO ! Vous avez gagné",50, colorGameWin);
         m_pSceneWin->createText(QPOINT_CENTER_UNDER_TEXT,"Appuyez sur ESC pour retourner au menu",50);
     }
 
@@ -264,7 +269,7 @@ void GameCore::setupBouncingArea() {
     // Création d'une image faite d'une suite verticale de briques
     QPixmap verticalWall(BRICK_SIZE, BRICK_SIZE * BOUNCING_AREA_SIZE - 38);
     QPainter painterVW(&verticalWall);
-    for (int col = 0; col < BOUNCING_AREA_SIZE - 38; col++)
+    for (int col = 0; col < BOUNCING_AREA_SIZE; col++)
         painterVW.drawPixmap(0, col * BRICK_SIZE, smallBrick);
 
     // Ajout de 3 sprites (utilisant les murs horizontaux et verticaux) pour délimiter

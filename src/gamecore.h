@@ -13,6 +13,7 @@
 #include <QString>
 #include <QColor>
 #include <QGraphicsSimpleTextItem>
+#include <QImage>
 
 
 class GameCanvas;
@@ -68,10 +69,10 @@ private:
     int spaceLines = 0;
     int spaceColumns = 0;
     int counterBlock = 54;
-    QColor couleurGameOver = QColor(255,0,0);
-    QColor couleurGameWin = QColor(0,255,0);
+    QColor colorGameOver = QColor(255,0,0);
+    QColor colorGameWin = QColor(0,255,0);
+    QColor colorBackGround = QColor(200,191,231);
     QGraphicsSimpleTextItem* textLifePlayer = nullptr;
-
 
 
 private slots:
