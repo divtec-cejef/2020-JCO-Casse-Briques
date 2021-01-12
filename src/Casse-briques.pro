@@ -57,5 +57,4 @@ HEADERS  += mainfrm.h \
     manualwalkinghandler.h \
     automaticwalkinghandler.h
 
-FORMS    += mainfrm.ui \
-    maincb.ui
+FORMS    += mainfrm.ui

@@ -40,7 +40,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Amusez-vous bien et bonne chance ! Jouable clavier/souris | Casse-briques fait par Broquet Rayan</string>
+      <string> Jouable clavier/souris | Amusez-vous bien et bonne chance !</string>
      </property>
      <property name="scaledContents">
       <bool>false</bool>

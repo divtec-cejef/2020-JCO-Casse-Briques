@@ -76,14 +76,14 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pWinGame = new Sprite(GameFramework::imagesPath() + "youWin.jpg");
     m_pTrophy = new Sprite (GameFramework::imagesPath() + "trophy.png");
     m_pWinGame->setPos(100, 20);
-    m_pTrophy->setPos(540,20);
+    m_pTrophy->setPos(540,40);
     m_pSceneWin->addSpriteToScene(m_pWinGame);
     m_pSceneWin->addSpriteToScene(m_pTrophy);
 
     // Création scène perdante
     m_pSceneLoss = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
-    m_pLossGame = new Sprite(GameFramework::imagesPath() + "gameover2.jpg");
-    m_pLossGame->setPos(0, -150);
+    m_pLossGame = new Sprite(GameFramework::imagesPath() + "gameover.jpg");
+    m_pLossGame->setPos(0, -80);
     m_pSceneLoss->addSpriteToScene(m_pLossGame);
 
     // Trace un rectangle blanc tout autour des limites de la scène.
@@ -229,7 +229,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     isDead = false;
 
     // Affiche la scène si le joueur a gagné.
-    if (counterBlock == 0 ) {
+    if (counterBlock != 54 ) {
         m_pGameCanvas->setCurrentScene(m_pSceneWin);
         m_pSceneWin->createText(QPOINT_CENTER_TEXT_WIN,"BRAVO ! Vous avez réussi ", 75);
         m_pSceneWin->createText(QPOINT_CENTER_UNDER_TEXT_WIN,"Appuyez sur ESC pour retourner au menu",50, colorReturnMenu);
