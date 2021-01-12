@@ -60,6 +60,8 @@ private:
     void setupBlueBall();
     void setupBouncingArea();
     Sprite* m_pTennisBall = nullptr;
+    Sprite* m_pButtonLeave = nullptr;
+    Sprite* m_pButtonPlay = nullptr;
     bool m_keySpacePressed = false;
     bool m_keyEscPressed = false;
     bool isWaiting = false;

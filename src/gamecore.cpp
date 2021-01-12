@@ -1,6 +1,6 @@
 /**
   Fichier qui contient toute la logique du jeu.
-  
+
   @author   RBR
   @date     décembre 2020
  */
@@ -33,7 +33,8 @@ const float BOUNCING_AREA_SIZE = 86.5;
 const QPointF QPOINT_CENTER_TEXT_LIFE(250,400);
 const QPointF QPOINT_CENTER_TEXT(400,300);
 const QPointF QPOINT_CENTER_UNDER_TEXT(250,450);
-
+const QPointF QPOINT_TEXT_MENU_BUTTON_PLAY(650,500);
+const QPointF QPOINT_TEXT_MENU_BUTTON_LEAVE(650,600);
 
 Sprite* m_pPlayer;
 //! Initialise le contrôleur de jeu.
@@ -52,21 +53,32 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Création scène menu
     m_pSceneMenu = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
 
+    // Création des boutons jouer et quitter
+    m_pButtonPlay = new Sprite(GameFramework::imagesPath() + "buttonPlay.png");
+    m_pButtonPlay->setPos(QPOINT_TEXT_MENU_BUTTON_PLAY);
+
+    m_pButtonLeave = new Sprite(GameFramework::imagesPath() + "buttonLeave.png");
+    m_pButtonLeave->setPos(QPOINT_TEXT_MENU_BUTTON_LEAVE);
+
     // Ajout du background au menu
     Sprite* pSpriteBackGround = new Sprite(GameFramework::imagesPath() + "backgroundCB.jpg");
     m_pSceneMenu->addSpriteToScene(pSpriteBackGround);
     pSpriteBackGround->setPos(-200,-200);
     m_pSceneMenu->createText(QPOINT_CENTER_TEXT,"Menu du jeu",100, colorGameOver);
 
+    // Ajout des boutons à la scène menu
+    m_pSceneMenu->addSpriteToScene(m_pButtonPlay);
+    m_pSceneMenu->addSpriteToScene(m_pButtonLeave);
+
     // Création scène gagnante
     m_pSceneWin = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
 
     // Création scène perdante
     m_pSceneLoss = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
-    
+
     // Trace un rectangle blanc tout autour des limites de la scène.
-    m_pSceneMenu->addRect(m_pSceneMenu->sceneRect(), QPen(Qt::blue));
-    
+    // m_pSceneMenu->addRect(m_pSceneMenu->sceneRect(), QPen(Qt::blue));
+
     // Instancier et initialiser les sprite ici :
 
     // Création de la zone de rebond
@@ -172,7 +184,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     if (isWaiting) {
 
         m_pTennisBall->setPos(m_pPlayer->x() - CENTERING_POS_X_BALL_RESPAWN, m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
-        static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(100,100);
+        static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(500,500);
         // Si l'utilisateur appuie sur Espace ou effectue un clic avec la souris
         // la balle continue sa trajectoire normalement
         if (m_keySpacePressed || onClick) {
