@@ -32,7 +32,8 @@ const int MAX_VALUE_WALL = 1250;
 const float BOUNCING_AREA_SIZE = 86.5;
 const QPointF QPOINT_CENTER_TEXT_LIFE(250,400);
 const QPointF QPOINT_CENTER_TEXT(400,300);
-const QPointF QPOINT_CENTER_UNDER_TEXT(250,450);
+const QPointF QPOINT_CENTER_TEXT_WIN(200,-100);
+const QPointF QPOINT_CENTER_UNDER_TEXT_WIN(200,700);
 const QPointF QPOINT_TEXT_MENU_BUTTON_PLAY(650,500);
 const QPointF QPOINT_TEXT_MENU_BUTTON_LEAVE(650,600);
 
@@ -63,8 +64,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Ajout du background au menu
     Sprite* pSpriteBackGround = new Sprite(GameFramework::imagesPath() + "backgroundCB.jpg");
     m_pSceneMenu->addSpriteToScene(pSpriteBackGround);
-    pSpriteBackGround->setPos(-200,-200);
-    m_pSceneMenu->createText(QPOINT_CENTER_TEXT,"Menu du jeu",100, colorGameOver);
+    pSpriteBackGround->setPos(-350,-350);
+    m_pSceneMenu->createText(QPOINT_CENTER_TEXT,"Menu du jeu",100);
 
     // Ajout des boutons à la scène menu
     m_pSceneMenu->addSpriteToScene(m_pButtonPlay);
@@ -72,9 +73,18 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Création scène gagnante
     m_pSceneWin = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+    m_pWinGame = new Sprite(GameFramework::imagesPath() + "youWin.jpg");
+    m_pTrophy = new Sprite (GameFramework::imagesPath() + "trophy.png");
+    m_pWinGame->setPos(100, 20);
+    m_pTrophy->setPos(540,20);
+    m_pSceneWin->addSpriteToScene(m_pWinGame);
+    m_pSceneWin->addSpriteToScene(m_pTrophy);
 
     // Création scène perdante
     m_pSceneLoss = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+    m_pLossGame = new Sprite(GameFramework::imagesPath() + "gameover2.jpg");
+    m_pLossGame->setPos(0, -150);
+    m_pSceneLoss->addSpriteToScene(m_pLossGame);
 
     // Trace un rectangle blanc tout autour des limites de la scène.
     // m_pSceneMenu->addRect(m_pSceneMenu->sceneRect(), QPen(Qt::blue));
@@ -184,7 +194,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     if (isWaiting) {
 
         m_pTennisBall->setPos(m_pPlayer->x() - CENTERING_POS_X_BALL_RESPAWN, m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
-        static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(500,500);
+        static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(150,150);
         // Si l'utilisateur appuie sur Espace ou effectue un clic avec la souris
         // la balle continue sa trajectoire normalement
         if (m_keySpacePressed || onClick) {
@@ -212,8 +222,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
         // Fin de partie pour le joueur, il a utilisé toutes ses vies.
         if (playerLife == 0) {
             m_pGameCanvas->setCurrentScene(m_pSceneLoss);
-            m_pSceneLoss->createText(QPOINT_CENTER_TEXT,"Game Over !",100, colorGameOver);
-            m_pSceneLoss->createText(QPOINT_CENTER_UNDER_TEXT,"Appuyez sur ESC pour retourner au menu",50);
+            m_pSceneLoss->createText(QPOINT_CENTER_TEXT_WIN,"Appuyez sur ESC pour retourner au menu",50, colorReturnMenu);
         }
     }
 
@@ -222,8 +231,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     // Affiche la scène si le joueur a gagné.
     if (counterBlock == 0 ) {
         m_pGameCanvas->setCurrentScene(m_pSceneWin);
-        m_pSceneWin->createText(QPOINT_CENTER_TEXT,"BRAVO ! Vous avez gagné",50, colorGameWin);
-        m_pSceneWin->createText(QPOINT_CENTER_UNDER_TEXT,"Appuyez sur ESC pour retourner au menu",50);
+        m_pSceneWin->createText(QPOINT_CENTER_TEXT_WIN,"BRAVO ! Vous avez réussi ", 75);
+        m_pSceneWin->createText(QPOINT_CENTER_UNDER_TEXT_WIN,"Appuyez sur ESC pour retourner au menu",50, colorReturnMenu);
     }
 
     // Retour au menu si l'utilisateur presse la touche Esc.
@@ -294,7 +303,7 @@ void GameCore::setupBouncingArea() {
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::black));
 
     // Création de la balle de tennis qui rebondi
-    m_pTennisBall = new Sprite(GameFramework::imagesPath() + "christmasball.png");
+    m_pTennisBall = new Sprite(GameFramework::imagesPath() + "basket.png");
     m_pTennisBall->setTickHandler(new BouncingSpriteHandler);
     m_pScene->addSpriteToScene(m_pTennisBall);
 

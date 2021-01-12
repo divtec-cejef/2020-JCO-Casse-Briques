@@ -62,6 +62,9 @@ private:
     Sprite* m_pTennisBall = nullptr;
     Sprite* m_pButtonLeave = nullptr;
     Sprite* m_pButtonPlay = nullptr;
+    Sprite* m_pWinGame = nullptr;
+    Sprite* m_pLossGame = nullptr;
+    Sprite* m_pTrophy = nullptr;
     bool m_keySpacePressed = false;
     bool m_keyEscPressed = false;
     bool isWaiting = false;
@@ -71,8 +74,7 @@ private:
     int spaceLines = 0;
     int spaceColumns = 0;
     int counterBlock = 54;
-    QColor colorGameOver = QColor(255,0,0);
-    QColor colorGameWin = QColor(0,255,0);
+    QColor colorReturnMenu = QColor(107,245,138);
     QColor colorBackGround = QColor(200,191,231);
     QGraphicsSimpleTextItem* textLifePlayer = nullptr;
 
