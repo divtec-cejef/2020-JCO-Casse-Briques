@@ -59,7 +59,7 @@ private:
     int m_PlayerDirection = 1;
     void setupBlueBall();
     void setupBouncingArea();
-    Sprite* m_pTennisBall = nullptr;
+    Sprite* m_pBasketBall = nullptr;
     Sprite* m_pButtonLeave = nullptr;
     Sprite* m_pButtonPlay = nullptr;
     Sprite* m_pWinGame = nullptr;
@@ -81,6 +81,7 @@ private:
 
 private slots:
     void onSpriteDestroyed(QObject* pSprite);
+    void createGameScene();
 
 };
 

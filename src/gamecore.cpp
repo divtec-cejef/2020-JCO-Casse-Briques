@@ -12,6 +12,7 @@
 #include <QPainter>
 #include <QString>
 #include <QColor>
+#include <QCoreApplication>
 
 #include "gamescene.h"
 #include "gamecanvas.h"
@@ -75,8 +76,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pSceneWin = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
     m_pWinGame = new Sprite(GameFramework::imagesPath() + "youWin.jpg");
     m_pTrophy = new Sprite (GameFramework::imagesPath() + "trophy.png");
-    m_pWinGame->setPos(100, 20);
-    m_pTrophy->setPos(540,40);
+    m_pWinGame->setPos(100, 120);
+    m_pTrophy->setPos(540,75);
     m_pSceneWin->addSpriteToScene(m_pWinGame);
     m_pSceneWin->addSpriteToScene(m_pTrophy);
 
@@ -85,9 +86,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pLossGame = new Sprite(GameFramework::imagesPath() + "gameover.jpg");
     m_pLossGame->setPos(0, -80);
     m_pSceneLoss->addSpriteToScene(m_pLossGame);
-
-    // Trace un rectangle blanc tout autour des limites de la scène.
-    // m_pSceneMenu->addRect(m_pSceneMenu->sceneRect(), QPen(Qt::blue));
 
     // Instancier et initialiser les sprite ici :
 
@@ -183,9 +181,9 @@ void GameCore::keyReleased(int key) {
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
     // Test si la balle dépasse la valeur du mur du bas
-    if (m_pTennisBall->y() >= 685) {
+    if (m_pBasketBall->y() >= 685) {
         isWaiting = true;
-        m_pTennisBall->unregisterFromTick();
+        m_pBasketBall->unregisterFromTick();
         playerLife--;
         isDead = true;
     }
@@ -193,8 +191,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     // Bloque la balle au centre du rectangle tant que l'utilisateur ne clique pas espace ou sur sa souris
     if (isWaiting) {
 
-        m_pTennisBall->setPos(m_pPlayer->x() - CENTERING_POS_X_BALL_RESPAWN, m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
-        static_cast<BouncingSpriteHandler*>(m_pTennisBall->tickHandler())->setSpriteVelocity(150,150);
+        m_pBasketBall->setPos(m_pPlayer->x() - CENTERING_POS_X_BALL_RESPAWN, m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
+        static_cast<BouncingSpriteHandler*>(m_pBasketBall->tickHandler())->setSpriteVelocity(150,150);
         // Si l'utilisateur appuie sur Espace ou effectue un clic avec la souris
         // la balle continue sa trajectoire normalement
         if (m_keySpacePressed || onClick) {
@@ -204,7 +202,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             textLifePlayer = nullptr;
             isWaiting = false;
             onClick = false;
-            m_pTennisBall->registerForTick();
+            m_pBasketBall->registerForTick();
         }
     }
 
@@ -266,6 +264,22 @@ void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons button
     emit notifyMouseButtonPressed(mousePosition, buttons);
     //m_pScene->spriteAt(mousePosition);
     onClick = true;
+
+    // Test si l'utilisateur fait un clique gauche et qu'il est sur le menu.
+    if (buttons.testFlag(Qt::LeftButton) && m_pGameCanvas->currentScene() == m_pSceneMenu) {
+
+        // Si oui, vérifie si il clique sur le bouton jouer .
+        if (m_pButtonPlay == m_pSceneMenu->spriteAt(mousePosition)) {
+            m_pButtonPlay->setOpacity(0.7);
+            m_pGameCanvas->setCurrentScene(m_pScene);
+
+            // Sinon vérifie si il clique sur le bouton quitter.
+        } else if(m_pButtonLeave == m_pSceneMenu->spriteAt(mousePosition)) {
+            m_pButtonLeave->setOpacity(0.7);
+            QCoreApplication::quit();
+        }
+    }
+
 }
 
 //! Traite le relâchement d'un bouton de la souris.
@@ -274,7 +288,7 @@ void GameCore::mouseButtonReleased(QPointF mousePosition, Qt::MouseButtons butto
 }
 
 
-//! Construit la zone de rebond, ainsi que la balle de tennis qui va s'y déplacer.
+//! Construit la zone de rebond, ainsi que la balle de basket qui va s'y déplacer.
 void GameCore::setupBouncingArea() {
 
     // Création des briques de délimitation de la zone et placement
@@ -303,14 +317,18 @@ void GameCore::setupBouncingArea() {
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::black));
 
     // Création de la balle de tennis qui rebondi
-    m_pTennisBall = new Sprite(GameFramework::imagesPath() + "basket.png");
-    m_pTennisBall->setTickHandler(new BouncingSpriteHandler);
-    m_pScene->addSpriteToScene(m_pTennisBall);
+    m_pBasketBall = new Sprite(GameFramework::imagesPath() + "basket.png");
+    m_pBasketBall->setTickHandler(new BouncingSpriteHandler);
+    m_pScene->addSpriteToScene(m_pBasketBall);
 
-    m_pTennisBall->registerForTick();
+    m_pBasketBall->registerForTick();
 
 }
 
 void GameCore::onSpriteDestroyed(QObject* pSprite) {
     counterBlock--;
+}
+
+void GameCore::createGameScene() {
+
 }

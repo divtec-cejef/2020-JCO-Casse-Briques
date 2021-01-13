@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_GameCore_t {
-    QByteArrayData data[14];
-    char stringdata0[199];
+    QByteArrayData data[15];
+    char stringdata0[215];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,7 +45,8 @@ QT_MOC_LITERAL(9, 134, 16), // "notifyKeyPressed"
 QT_MOC_LITERAL(10, 151, 3), // "key"
 QT_MOC_LITERAL(11, 155, 17), // "notifyKeyReleased"
 QT_MOC_LITERAL(12, 173, 17), // "onSpriteDestroyed"
-QT_MOC_LITERAL(13, 191, 7) // "pSprite"
+QT_MOC_LITERAL(13, 191, 7), // "pSprite"
+QT_MOC_LITERAL(14, 199, 15) // "createGameScene"
 
     },
     "GameCore\0notifyMouseMoved\0\0newMousePosition\0"
@@ -53,7 +54,7 @@ QT_MOC_LITERAL(13, 191, 7) // "pSprite"
     "Qt::MouseButtons\0buttons\0"
     "notifyMouseButtonReleased\0notifyKeyPressed\0"
     "key\0notifyKeyReleased\0onSpriteDestroyed\0"
-    "pSprite"
+    "pSprite\0createGameScene"
 };
 #undef QT_MOC_LITERAL
 
@@ -63,7 +64,7 @@ static const uint qt_meta_data_GameCore[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -71,14 +72,15 @@ static const uint qt_meta_data_GameCore[] = {
        5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   44,    2, 0x06 /* Public */,
-       4,    2,   47,    2, 0x06 /* Public */,
-       8,    2,   52,    2, 0x06 /* Public */,
-       9,    1,   57,    2, 0x06 /* Public */,
-      11,    1,   60,    2, 0x06 /* Public */,
+       1,    1,   49,    2, 0x06 /* Public */,
+       4,    2,   52,    2, 0x06 /* Public */,
+       8,    2,   57,    2, 0x06 /* Public */,
+       9,    1,   62,    2, 0x06 /* Public */,
+      11,    1,   65,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      12,    1,   63,    2, 0x08 /* Private */,
+      12,    1,   68,    2, 0x08 /* Private */,
+      14,    0,   71,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QPointF,    3,
@@ -89,6 +91,7 @@ static const uint qt_meta_data_GameCore[] = {
 
  // slots: parameters
     QMetaType::Void, QMetaType::QObjectStar,   13,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -105,6 +108,7 @@ void GameCore::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 3: _t->notifyKeyPressed((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 4: _t->notifyKeyReleased((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->onSpriteDestroyed((*reinterpret_cast< QObject*(*)>(_a[1]))); break;
+        case 6: _t->createGameScene(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -176,13 +180,13 @@ int GameCore::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

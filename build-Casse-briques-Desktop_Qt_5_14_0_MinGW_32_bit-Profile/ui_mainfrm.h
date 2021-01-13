@@ -83,7 +83,7 @@ public:
     void retranslateUi(QWidget *MainFrm)
     {
         MainFrm->setWindowTitle(QCoreApplication::translate("MainFrm", "Casse-briques", nullptr));
-        label->setText(QCoreApplication::translate("MainFrm", "Amusez-vous bien et bonne chance ! Jouable clavier/souris | Casse-briques fait par Broquet Rayan", nullptr));
+        label->setText(QCoreApplication::translate("MainFrm", " Jouable clavier/souris | Amusez-vous bien et bonne chance !", nullptr));
     } // retranslateUi
 
 };
