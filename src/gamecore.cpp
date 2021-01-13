@@ -38,7 +38,6 @@ const QPointF QPOINT_CENTER_UNDER_TEXT_WIN(200,700);
 const QPointF QPOINT_TEXT_MENU_BUTTON_PLAY(650,500);
 const QPointF QPOINT_TEXT_MENU_BUTTON_LEAVE(650,600);
 
-Sprite* m_pPlayer;
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
 //! \param pParent      Pointeur sur le parent (afin d'obtenir une destruction automatique de cet objet).
@@ -92,33 +91,11 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     // Création de la zone de rebond
     setupBouncingArea();
 
-    // Ajout du sprite joueur (le pad, le rectangle)
-    Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "rectangle2.png");
-    m_pScene->addSpriteToScene(pSprite);
-    pSprite->setPos(m_pScene->width()/2.00, 650);
-    m_pPlayer = pSprite;
+    // Création des blocs à détruire
+    createBlock();
 
-    // Création des blocs (18x3)
-    for (int j=0;j<3;j++) {
-
-        for (int i=0;i<18;i++) {
-            // Ajout d'un sprite d'un sprite cube (obstacle à casser) et lui attribut un "id"
-            Sprite* pBlocSprite = new Sprite(GameFramework::imagesPath() + "wall.png");
-            m_pScene->addSpriteToScene(pBlocSprite);
-            pBlocSprite->setPos(50 + spaceLines, 80 + spaceColumns);
-            spaceLines += 65;
-            pBlocSprite->setData(0,"bloc-a-detruire");
-            connect(pBlocSprite, &Sprite::destroyed, this, &GameCore::onSpriteDestroyed);
-        }
-        // Réinitialise les valeurs et ajoutes une marge de 65 pour l'espacement des blocs.
-        spaceLines = 0;
-        spaceColumns += 65;
-    }
-
-
-    // Animations du personnage (rectangle)
-    pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
-    pSprite->startAnimation(1000);
+    // Création du joueur (le rectangle)
+    createPlayer();
 
     // Positionne la boule sur le rectangle et attend l'intéraction (espace) de l'utilisateur.
     isWaiting = true;
@@ -329,6 +306,33 @@ void GameCore::onSpriteDestroyed(QObject* pSprite) {
     counterBlock--;
 }
 
-void GameCore::createGameScene() {
+void GameCore::createBlock() {
+    // Création des blocs (18x3)
+    for (int j=0;j<3;j++) {
 
+        for (int i=0;i<18;i++) {
+            // Ajout d'un sprite d'un sprite cube (obstacle à casser) et lui attribut un "id"
+            Sprite* pBlocSprite = new Sprite(GameFramework::imagesPath() + "wall.png");
+            m_pScene->addSpriteToScene(pBlocSprite);
+            pBlocSprite->setPos(50 + spaceLines, 80 + spaceColumns);
+            spaceLines += 65;
+            pBlocSprite->setData(0,"bloc-a-detruire");
+            connect(pBlocSprite, &Sprite::destroyed, this, &GameCore::onSpriteDestroyed);
+        }
+        // Réinitialise les valeurs et ajoutes une marge de 65 pour l'espacement des blocs.
+        spaceLines = 0;
+        spaceColumns += 65;
+    }
+}
+
+void GameCore::createPlayer() {
+    // Ajout du sprite joueur (le pad, le rectangle)
+    Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "rectangle2.png");
+    m_pScene->addSpriteToScene(pSprite);
+    pSprite->setPos(m_pScene->width()/2.00, 650);
+    m_pPlayer = pSprite;
+
+    // Animations du personnage (rectangle)
+    pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
+    pSprite->startAnimation(1000);
 }

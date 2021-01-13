@@ -81,7 +81,8 @@ private:
 
 private slots:
     void onSpriteDestroyed(QObject* pSprite);
-    void createGameScene();
+    void createBlock();
+    void createPlayer();
 
 };
 
