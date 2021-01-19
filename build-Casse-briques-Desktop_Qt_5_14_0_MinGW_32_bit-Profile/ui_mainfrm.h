@@ -38,8 +38,10 @@ public:
         font.setUnderline(true);
         font.setWeight(75);
         MainFrm->setFont(font);
+        MainFrm->setCursor(QCursor(Qt::PointingHandCursor));
+        MainFrm->setWindowTitle(QString::fromUtf8("Casse-briques"));
         QIcon icon;
-        icon.addFile(QString::fromUtf8("../../../Users/broqray/Desktop/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("../res/images/icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainFrm->setWindowIcon(icon);
         verticalLayout = new QVBoxLayout(MainFrm);
         verticalLayout->setSpacing(6);
@@ -82,8 +84,8 @@ public:
 
     void retranslateUi(QWidget *MainFrm)
     {
-        MainFrm->setWindowTitle(QCoreApplication::translate("MainFrm", "Casse-briques", nullptr));
         label->setText(QCoreApplication::translate("MainFrm", " Jouable clavier/souris | Amusez-vous bien et bonne chance !", nullptr));
+        (void)MainFrm;
     } // retranslateUi
 
 };

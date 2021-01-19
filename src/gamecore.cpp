@@ -98,7 +98,7 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     createPlayer();
 
     // Positionne la boule sur le rectangle et attend l'intéraction (espace) de l'utilisateur.
-    isWaiting = true;
+    m_isWaiting = true;
 
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
     // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
@@ -159,52 +159,52 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
     // Test si la balle dépasse la valeur du mur du bas
     if (m_pBasketBall->y() >= 685) {
-        isWaiting = true;
+        m_isWaiting = true;
         m_pBasketBall->unregisterFromTick();
-        playerLife--;
-        isDead = true;
+        m_playerLife--;
+        m_isDead = true;
     }
 
     // Bloque la balle au centre du rectangle tant que l'utilisateur ne clique pas espace ou sur sa souris
-    if (isWaiting) {
+    if (m_isWaiting) {
 
         m_pBasketBall->setPos(m_pPlayer->x() - CENTERING_POS_X_BALL_RESPAWN, m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
         static_cast<BouncingSpriteHandler*>(m_pBasketBall->tickHandler())->setSpriteVelocity(150,150);
         // Si l'utilisateur appuie sur Espace ou effectue un clic avec la souris
         // la balle continue sa trajectoire normalement
-        if (m_keySpacePressed || onClick) {
+        if (m_keySpacePressed || m_onClick) {
 
             // Supprime le texte, réinitialise les valeurs et redémarre le tick
             delete textLifePlayer;
             textLifePlayer = nullptr;
-            isWaiting = false;
-            onClick = false;
+            m_isWaiting = false;
+            m_onClick = false;
             m_pBasketBall->registerForTick();
         }
     }
 
 
     // Affiche le nombre de vie restant du joueur.
-    if (isDead) {
-        if (playerLife >= 2) {
+    if (m_isDead) {
+        if (m_playerLife >= 2) {
             textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT_LIFE,
-                                                  QString("Il vous reste %1 vies.").arg(playerLife), 100);
-        } else if (playerLife == 1){
+                                                  QString("Il vous reste %1 vies.").arg(m_playerLife), 100);
+        } else if (m_playerLife == 1){
             textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT_LIFE,
-                                                  QString("Il vous reste %1 vie.").arg(playerLife), 110);
+                                                  QString("Il vous reste %1 vie.").arg(m_playerLife), 110);
         }
 
         // Fin de partie pour le joueur, il a utilisé toutes ses vies.
-        if (playerLife == 0) {
+        if (m_playerLife == 0) {
             m_pGameCanvas->setCurrentScene(m_pSceneLoss);
             m_pSceneLoss->createText(QPOINT_CENTER_TEXT_WIN,"Appuyez sur ESC pour retourner au menu",50, colorReturnMenu);
         }
     }
 
-    isDead = false;
+    m_isDead = false;
 
     // Affiche la scène si le joueur a gagné.
-    if (counterBlock != 54 ) {
+    if (m_counterBlock != 54 ) {
         m_pGameCanvas->setCurrentScene(m_pSceneWin);
         m_pSceneWin->createText(QPOINT_CENTER_TEXT_WIN,"BRAVO ! Vous avez réussi ", 75);
         m_pSceneWin->createText(QPOINT_CENTER_UNDER_TEXT_WIN,"Appuyez sur ESC pour retourner au menu",50, colorReturnMenu);
@@ -240,7 +240,7 @@ void GameCore::mouseMoved(QPointF newMousePosition) {
 void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons) {
     emit notifyMouseButtonPressed(mousePosition, buttons);
     //m_pScene->spriteAt(mousePosition);
-    onClick = true;
+    m_onClick = true;
 
     // Test si l'utilisateur fait un clique gauche et qu'il est sur le menu.
     if (buttons.testFlag(Qt::LeftButton) && m_pGameCanvas->currentScene() == m_pSceneMenu) {
@@ -249,7 +249,8 @@ void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons button
         if (m_pButtonPlay == m_pSceneMenu->spriteAt(mousePosition)) {
             m_pButtonPlay->setOpacity(0.7);
             qDebug() << "Appuyé";
-            m_pGameCanvas->setCurrentScene(m_pSceneWin);
+            m_pGameCanvas->setCurrentScene(m_pSceneLoss);
+            qDebug() << "Appuyé2";
 
         // Sinon vérifie si il clique sur le bouton quitter.
         } else if(m_pButtonLeave == m_pSceneMenu->spriteAt(mousePosition)) {
@@ -304,7 +305,7 @@ void GameCore::setupBouncingArea() {
 }
 
 void GameCore::onSpriteDestroyed(QObject* pSprite) {
-    counterBlock--;
+    m_counterBlock--;
 }
 
 // Créer les blocs à détruire
@@ -316,14 +317,14 @@ void GameCore::createBlock() {
             // Ajout d'un sprite d'un sprite cube (obstacle à casser) et lui attribut un "id"
             Sprite* pBlocSprite = new Sprite(GameFramework::imagesPath() + "wall.png");
             m_pScene->addSpriteToScene(pBlocSprite);
-            pBlocSprite->setPos(50 + spaceLines, 80 + spaceColumns);
-            spaceLines += 65;
+            pBlocSprite->setPos(50 + m_spaceLines, 80 + m_spaceColumns);
+            m_spaceLines += 65;
             pBlocSprite->setData(0,"bloc-a-detruire");
             connect(pBlocSprite, &Sprite::destroyed, this, &GameCore::onSpriteDestroyed);
         }
         // Réinitialise les valeurs et ajoutes une marge de 65 pour l'espacement des blocs.
-        spaceLines = 0;
-        spaceColumns += 65;
+        m_spaceLines = 0;
+        m_spaceColumns += 65;
     }
 }
 

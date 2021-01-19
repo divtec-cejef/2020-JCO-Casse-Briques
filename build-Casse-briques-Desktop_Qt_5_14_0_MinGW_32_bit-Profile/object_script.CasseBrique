@@ -2,7 +2,6 @@ main.o
 keytickhandler.o
 mainfrm.o
 gamescene.o
-player.o
 playertickhandler.o
 sprite.o
 gamecore.o
@@ -15,7 +14,6 @@ utilities.o
 moc_mainfrm.o
 moc_gamescene.o
 moc_keytickhandler.o
-moc_player.o
 moc_sprite.o
 moc_gamecore.o
 moc_gamecanvas.o

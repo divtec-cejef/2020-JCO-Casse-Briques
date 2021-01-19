@@ -54,29 +54,35 @@ private:
     GameScene* m_pSceneMenu = nullptr;
     GameScene* m_pSceneWin = nullptr;
     GameScene* m_pSceneLoss = nullptr;
+
     Sprite* m_pPlayer = nullptr;
     Sprite* m_pBloc = nullptr;
-    int m_PlayerDirection = 1;
-    void setupBlueBall();
-    void setupBouncingArea();
     Sprite* m_pBasketBall = nullptr;
     Sprite* m_pButtonLeave = nullptr;
     Sprite* m_pButtonPlay = nullptr;
     Sprite* m_pWinGame = nullptr;
     Sprite* m_pLossGame = nullptr;
     Sprite* m_pTrophy = nullptr;
+
     bool m_keySpacePressed = false;
     bool m_keyEscPressed = false;
-    bool isWaiting = false;
-    bool isDead = false;
-    bool onClick = false;
-    int playerLife = 3;
-    int spaceLines = 0;
-    int spaceColumns = 0;
-    int counterBlock = 54;
+    bool m_isWaiting = false;
+    bool m_isDead = false;
+    bool m_onClick = false;
+
+    int m_PlayerDirection = 1;
+    int m_playerLife = 3;
+    int m_spaceLines = 0;
+    int m_spaceColumns = 0;
+    int m_counterBlock = 54;
+
     QColor colorReturnMenu = QColor(107,245,138);
     QColor colorBackGround = QColor(200,191,231);
+
     QGraphicsSimpleTextItem* textLifePlayer = nullptr;
+
+    void setupBlueBall();
+    void setupBouncingArea();
 
 
 private slots:
