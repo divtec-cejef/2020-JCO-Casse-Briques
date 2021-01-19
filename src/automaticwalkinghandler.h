@@ -1,4 +1,4 @@
-/**
+**
   \file
   \brief    Déclaration de la classe AutomaticWalkingHandler.
   \author   JCO

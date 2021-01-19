@@ -1,4 +1,4 @@
-/**
+**
   \file
   \brief    Déclaration de la classe BlueBall.
   \author   JCO

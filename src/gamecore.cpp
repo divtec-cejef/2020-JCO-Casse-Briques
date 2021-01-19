@@ -18,12 +18,12 @@
 #include "gamecanvas.h"
 #include "resources.h"
 #include "utilities.h"
-#include "blueball.h"
 #include "bouncingspritehandler.h"
 #include "playertickhandler.h"
 #include "bouncingspritehandler.h"
 
 
+// Initialisation des constantes
 const int SCENE_WIDTH = 1280;
 const int CENTERING_POS_X_BALL_RESPAWN = 20;
 const int CENTERING_POS_Y_BALL_RESPAWN = 40;
@@ -248,9 +248,10 @@ void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons button
         // Si oui, vérifie si il clique sur le bouton jouer .
         if (m_pButtonPlay == m_pSceneMenu->spriteAt(mousePosition)) {
             m_pButtonPlay->setOpacity(0.7);
-            m_pGameCanvas->setCurrentScene(m_pScene);
+            qDebug() << "Appuyé";
+            m_pGameCanvas->setCurrentScene(m_pSceneWin);
 
-            // Sinon vérifie si il clique sur le bouton quitter.
+        // Sinon vérifie si il clique sur le bouton quitter.
         } else if(m_pButtonLeave == m_pSceneMenu->spriteAt(mousePosition)) {
             m_pButtonLeave->setOpacity(0.7);
             QCoreApplication::quit();
@@ -293,7 +294,7 @@ void GameCore::setupBouncingArea() {
 
     m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::black));
 
-    // Création de la balle de tennis qui rebondi
+    // Création de la balle de tennis qui rebondit
     m_pBasketBall = new Sprite(GameFramework::imagesPath() + "basket.png");
     m_pBasketBall->setTickHandler(new BouncingSpriteHandler);
     m_pScene->addSpriteToScene(m_pBasketBall);
@@ -306,6 +307,7 @@ void GameCore::onSpriteDestroyed(QObject* pSprite) {
     counterBlock--;
 }
 
+// Créer les blocs à détruire
 void GameCore::createBlock() {
     // Création des blocs (18x3)
     for (int j=0;j<3;j++) {
@@ -325,6 +327,7 @@ void GameCore::createBlock() {
     }
 }
 
+// Créer le joueur et les animatons (changement de couleur)
 void GameCore::createPlayer() {
     // Ajout du sprite joueur (le pad, le rectangle)
     Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "rectangle2.png");

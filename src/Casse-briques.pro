@@ -22,39 +22,27 @@ SOURCES += main.cpp\
     gamescene.cpp \
     player.cpp \
     playertickhandler.cpp \
-    randommovetickhandler.cpp \
     sprite.cpp \
     gamecore.cpp \
     resources.cpp \
     gameview.cpp \
-    utilities.cpp \
     gamecanvas.cpp \
-    walkingman.cpp \
-    blueball.cpp \
-    spinningpinwheel.cpp \
     spritetickhandler.cpp \
     bouncingspritehandler.cpp \
-    manualwalkinghandler.cpp \
-    automaticwalkinghandler.cpp
+    utilities.cpp
 
 HEADERS  += mainfrm.h \
     gamescene.h \
     keytickhandler.h \
     player.h \
     playertickhandler.h \
-    randommovetickhandler.h \
     sprite.h \
     gamecore.h \
     resources.h \
     gameview.h \
-    utilities.h \
     gamecanvas.h \
-    walkingman.h \
-    blueball.h \
-    spinningpinwheel.h \
     spritetickhandler.h \
     bouncingspritehandler.h \
-    manualwalkinghandler.h \
-    automaticwalkinghandler.h
+    utilities.h
 
 FORMS    += mainfrm.ui

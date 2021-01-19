@@ -1,4 +1,4 @@
-/**
+**
   \file
   \brief    Définition de la classe ManualWalkingHandler.
   \author   JCO

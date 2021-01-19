@@ -15,8 +15,7 @@
 //!
 //! - Spécialiser la classe Sprite pour y ajouter une gestion des touches du clavier.
 //! - Réagir aux événements clavier pour mémoriser l'état des touches, afin de
-//!   déplacer correctement la balle.
-//!   Pour que les fonctions onKeyPressed() et onKeyReleased() soient appelées lorsqu'une
+//!   déplacer correctement la balle.//!   Pour que les fonctions onKeyPressed() et onKeyReleased() soient appelées lorsqu'une
 //!   touche est appuyée, il faut que l'objet qui crée une instance de BlueBall se
 //!   charge de les connecter aux signaux GameCore::notifyKeyPressed() et
 //!   GameCore::notifyKeyReleased().

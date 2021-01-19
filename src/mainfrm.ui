@@ -19,12 +19,15 @@
     <underline>true</underline>
    </font>
   </property>
+  <property name="cursor">
+   <cursorShape>PointingHandCursor</cursorShape>
+  </property>
   <property name="windowTitle">
-   <string>Casse-briques</string>
+   <string notr="true">Casse-briques</string>
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../Users/broqray/Desktop/icon.png</normaloff>../../../Users/broqray/Desktop/icon.png</iconset>
+    <normaloff>../res/images/icon.png</normaloff>../res/images/icon.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
