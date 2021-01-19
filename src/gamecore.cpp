@@ -30,8 +30,9 @@ const int CENTERING_POS_Y_BALL_RESPAWN = 40;
 const int BRICK_SIZE = 15;
 const int MIN_VALUE_WALL = 32;
 const int MAX_VALUE_WALL = 1250;
+const int SPACE_LIFE_PLAYER = 75;
 const float BOUNCING_AREA_SIZE = 86.5;
-const QPointF QPOINT_CENTER_TEXT_LIFE(250,400);
+const QPointF QPOINT_CENTER_TEXT_LIFE(250,-125);
 const QPointF QPOINT_CENTER_TEXT(400,300);
 const QPointF QPOINT_CENTER_TEXT_WIN(200,-100);
 const QPointF QPOINT_CENTER_UNDER_TEXT_WIN(200,700);
@@ -47,9 +48,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pGameCanvas = pGameCanvas;
 
     // Créé la scène de base et indique au canvas qu'il faut l'afficher.
-    m_pScene = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
-    pGameCanvas->setCurrentScene(m_pScene);
-    m_pScene->setBackgroundColor(colorBackGround);
+    m_pSceneGame = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+    pGameCanvas->setCurrentScene(m_pSceneGame);
+    m_pSceneGame->setBackgroundColor(colorBackGround);
 
     // Création scène menu
     m_pSceneMenu = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
@@ -86,8 +87,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pLossGame->setPos(0, -80);
     m_pSceneLoss->addSpriteToScene(m_pLossGame);
 
-    // Instancier et initialiser les sprite ici :
-
     // Création de la zone de rebond
     setupBouncingArea();
 
@@ -96,6 +95,9 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Création du joueur (le rectangle)
     createPlayer();
+
+    // Création des sprites coeurs vie du joueur.
+    createLifePlayer();
 
     // Positionne la boule sur le rectangle et attend l'intéraction (espace) de l'utilisateur.
     m_isWaiting = true;
@@ -110,8 +112,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
 //! Destructeur de GameCore : efface les scènes
 GameCore::~GameCore() {
-    delete m_pScene;
-    m_pScene = nullptr;
+    delete m_pSceneGame;
+    m_pSceneGame = nullptr;
 }
 
 //! Traite la pression d'une touche.
@@ -127,14 +129,15 @@ void GameCore::keyPressed(int key) {
             m_pPlayer->setX(m_pPlayer->x() - 40); break;
 
     case Qt::Key_Right:
-        if(m_pPlayer->right() < m_pScene->width() - 10)
+        if(m_pPlayer->right() < m_pSceneGame->width() - 10)
             m_pPlayer->setX(m_pPlayer->x() + 40); break;
 
     case Qt::Key_Space:
         m_keySpacePressed = true;
         break;
     case Qt::Key_Escape:
-        m_keyEscPressed = true;
+        // Retour au menu si l'utilisateur presse la touche Esc.
+        m_pGameCanvas->setCurrentScene(m_pSceneMenu);
         break;
     }
 }
@@ -184,35 +187,39 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     }
 
 
-    // Affiche le nombre de vie restant du joueur.
+    // Affiche le nombre de vie(s) restant du joueur.
     if (m_isDead) {
-        if (m_playerLife >= 2) {
-            textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT_LIFE,
-                                                  QString("Il vous reste %1 vies.").arg(m_playerLife), 100);
-        } else if (m_playerLife == 1){
-            textLifePlayer = m_pScene->createText(QPOINT_CENTER_TEXT_LIFE,
-                                                  QString("Il vous reste %1 vie.").arg(m_playerLife), 110);
-        }
 
-        // Fin de partie pour le joueur, il a utilisé toutes ses vies.
-        if (m_playerLife == 0) {
+
+        switch(m_playerLife)
+        {
+        case 2:
+            textLifePlayer = m_pSceneGame->createText(QPOINT_CENTER_TEXT_LIFE,
+                                                      QString("Il vous reste %1 vies.").arg(m_playerLife), 100);
+            m_pLifePlayer3->deleteLater();
+            break;
+        case 1:
+            textLifePlayer = m_pSceneGame->createText(QPOINT_CENTER_TEXT_LIFE,
+                                                      QString("Il vous reste %1 vie.").arg(m_playerLife), 110);
+            m_pLifePlayer2->deleteLater();
+            break;
+        case 0:
             m_pGameCanvas->setCurrentScene(m_pSceneLoss);
             m_pSceneLoss->createText(QPOINT_CENTER_TEXT_WIN,"Appuyez sur ESC pour retourner au menu",50, colorReturnMenu);
+            break;
+        default:
+            textLifePlayer = m_pSceneGame->createText(QPOINT_CENTER_TEXT_LIFE,
+                                                      QString("Vous n'avez plus de vie !\n Retournez au menu\n pour recommencer !"), 100);
         }
     }
 
     m_isDead = false;
 
     // Affiche la scène si le joueur a gagné.
-    if (m_counterBlock != 54 ) {
+    if (m_counterBlock == 0 ) {
         m_pGameCanvas->setCurrentScene(m_pSceneWin);
         m_pSceneWin->createText(QPOINT_CENTER_TEXT_WIN,"BRAVO ! Vous avez réussi ", 75);
         m_pSceneWin->createText(QPOINT_CENTER_UNDER_TEXT_WIN,"Appuyez sur ESC pour retourner au menu",50, colorReturnMenu);
-    }
-
-    // Retour au menu si l'utilisateur presse la touche Esc.
-    if (m_keyEscPressed) {
-        m_pGameCanvas->setCurrentScene(m_pSceneMenu);
     }
 
     // Si le pad sort des limites, le repositionne à l'intérieur
@@ -248,14 +255,21 @@ void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons button
         // Si oui, vérifie si il clique sur le bouton jouer .
         if (m_pButtonPlay == m_pSceneMenu->spriteAt(mousePosition)) {
             m_pButtonPlay->setOpacity(0.7);
-            qDebug() << "Appuyé";
-            m_pGameCanvas->setCurrentScene(m_pSceneLoss);
-            qDebug() << "Appuyé2";
+            m_pGameCanvas->setCurrentScene(m_pSceneGame);
+            // Créé la scène de base et indique au canvas qu'il faut l'afficher.
+            //            m_pScene = m_pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+            //            m_pGameCanvas->setCurrentScene(m_pScene);
 
-        // Sinon vérifie si il clique sur le bouton quitter.
+            // Sinon vérifie si il clique sur le bouton quitter.
         } else if(m_pButtonLeave == m_pSceneMenu->spriteAt(mousePosition)) {
             m_pButtonLeave->setOpacity(0.7);
-            QCoreApplication::quit();
+            m_pSceneGame = nullptr;
+            m_pSceneGame = m_pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+            createBlock();
+            createPlayer();
+            m_pGameCanvas->setCurrentScene(m_pSceneGame);
+            //            QCoreApplication::quit();
+
         }
     }
 
@@ -288,17 +302,17 @@ void GameCore::setupBouncingArea() {
 
     // Ajout de 3 sprites (utilisant les murs horizontaux et verticaux) pour délimiter
     // une zone de rebond.
-    m_pScene->addSpriteToScene(new Sprite(horizontalWall), 0, 0);
+    m_pSceneGame->addSpriteToScene(new Sprite(horizontalWall), 0, 0);
 
-    m_pScene->addSpriteToScene(new Sprite(verticalWall), -15, 0);
-    m_pScene->addSpriteToScene(new Sprite(verticalWall), 1281, 0);
+    m_pSceneGame->addSpriteToScene(new Sprite(verticalWall), -15, 0);
+    m_pSceneGame->addSpriteToScene(new Sprite(verticalWall), 1281, 0);
 
-    m_pScene->addRect(m_pScene->sceneRect(), QPen(Qt::black));
+    m_pSceneGame->addRect(m_pSceneGame->sceneRect(), QPen(Qt::black));
 
     // Création de la balle de tennis qui rebondit
     m_pBasketBall = new Sprite(GameFramework::imagesPath() + "basket.png");
     m_pBasketBall->setTickHandler(new BouncingSpriteHandler);
-    m_pScene->addSpriteToScene(m_pBasketBall);
+    m_pSceneGame->addSpriteToScene(m_pBasketBall);
 
     m_pBasketBall->registerForTick();
 
@@ -316,7 +330,7 @@ void GameCore::createBlock() {
         for (int i=0;i<18;i++) {
             // Ajout d'un sprite d'un sprite cube (obstacle à casser) et lui attribut un "id"
             Sprite* pBlocSprite = new Sprite(GameFramework::imagesPath() + "wall.png");
-            m_pScene->addSpriteToScene(pBlocSprite);
+            m_pSceneGame->addSpriteToScene(pBlocSprite);
             pBlocSprite->setPos(50 + m_spaceLines, 80 + m_spaceColumns);
             m_spaceLines += 65;
             pBlocSprite->setData(0,"bloc-a-detruire");
@@ -332,11 +346,29 @@ void GameCore::createBlock() {
 void GameCore::createPlayer() {
     // Ajout du sprite joueur (le pad, le rectangle)
     Sprite* pSprite = new Sprite(GameFramework::imagesPath() + "rectangle2.png");
-    m_pScene->addSpriteToScene(pSprite);
-    pSprite->setPos(m_pScene->width()/2.00, 650);
+    m_pSceneGame->addSpriteToScene(pSprite);
+    pSprite->setPos(m_pSceneGame->width()/2.00, 650);
     m_pPlayer = pSprite;
 
     // Animations du personnage (rectangle)
     pSprite->addAnimationFrame(GameFramework::imagesPath() + "rectangle2_vert.png");
     pSprite->startAnimation(1000);
+}
+
+// Créer les vies du joueurs et les affiches sur l'écran.
+void GameCore::createLifePlayer() {
+
+    // Création des sprites pour afficher les vies
+    m_pLifePlayer1 = new Sprite(GameFramework::imagesPath() + "coeurViePlein.png");
+    m_pLifePlayer2 = new Sprite(GameFramework::imagesPath() + "coeurViePlein.png");
+    m_pLifePlayer3 = new Sprite(GameFramework::imagesPath() + "coeurViePlein.png");
+
+    m_pSceneGame->addSpriteToScene(m_pLifePlayer1);
+    m_pSceneGame->addSpriteToScene(m_pLifePlayer2);
+    m_pSceneGame->addSpriteToScene(m_pLifePlayer3);
+
+    m_pLifePlayer1->setPos(m_playerLifeDisplayX, m_playerLifeDisplayY);
+    m_pLifePlayer2->setPos(m_playerLifeDisplayX + SPACE_LIFE_PLAYER, m_playerLifeDisplayY);
+    m_pLifePlayer3->setPos(m_playerLifeDisplayX + (2 * SPACE_LIFE_PLAYER), m_playerLifeDisplayY);
+
 }

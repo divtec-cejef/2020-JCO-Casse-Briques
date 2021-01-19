@@ -50,7 +50,7 @@ signals:
 
 private:
     GameCanvas* m_pGameCanvas = nullptr;
-    GameScene* m_pScene = nullptr;
+    GameScene* m_pSceneGame = nullptr;
     GameScene* m_pSceneMenu = nullptr;
     GameScene* m_pSceneWin = nullptr;
     GameScene* m_pSceneLoss = nullptr;
@@ -63,6 +63,10 @@ private:
     Sprite* m_pWinGame = nullptr;
     Sprite* m_pLossGame = nullptr;
     Sprite* m_pTrophy = nullptr;
+    Sprite* m_pLifePlayer1 = nullptr;
+    Sprite* m_pLifePlayer2 = nullptr;
+    Sprite* m_pLifePlayer3 = nullptr;
+    Sprite* m_pLifePlayerEmpty = nullptr;
 
     bool m_keySpacePressed = false;
     bool m_keyEscPressed = false;
@@ -72,6 +76,8 @@ private:
 
     int m_PlayerDirection = 1;
     int m_playerLife = 3;
+    int m_playerLifeDisplayX = 10;
+    int m_playerLifeDisplayY = -80;
     int m_spaceLines = 0;
     int m_spaceColumns = 0;
     int m_counterBlock = 54;
@@ -83,6 +89,7 @@ private:
 
     void setupBlueBall();
     void setupBouncingArea();
+    void createLifePlayer();
 
 
 private slots:
