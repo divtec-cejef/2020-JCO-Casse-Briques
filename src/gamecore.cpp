@@ -36,8 +36,9 @@ const QPointF QPOINT_CENTER_TEXT_LIFE(250,-125);
 const QPointF QPOINT_CENTER_TEXT(400,300);
 const QPointF QPOINT_CENTER_TEXT_WIN(200,-100);
 const QPointF QPOINT_CENTER_UNDER_TEXT_WIN(200,700);
-const QPointF QPOINT_TEXT_MENU_BUTTON_PLAY(650,500);
-const QPointF QPOINT_TEXT_MENU_BUTTON_LEAVE(650,600);
+const QPointF QPOINT_TEXT_MENU_BUTTON_RESUME(650,500);
+const QPointF QPOINT_TEXT_MENU_BUTTON_RESTART(650,600);
+const QPointF QPOINT_TEXT_MENU_BUTTON_LEAVE(650,700);
 
 //! Initialise le contrôleur de jeu.
 //! \param pGameCanvas  GameCanvas pour lequel cet objet travaille.
@@ -56,8 +57,11 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pSceneMenu = pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
 
     // Création des boutons jouer et quitter
-    m_pButtonPlay = new Sprite(GameFramework::imagesPath() + "buttonPlay.png");
-    m_pButtonPlay->setPos(QPOINT_TEXT_MENU_BUTTON_PLAY);
+    m_pButtonResume = new Sprite(GameFramework::imagesPath() + "buttonResume.png");
+    m_pButtonResume->setPos(QPOINT_TEXT_MENU_BUTTON_RESUME);
+
+    m_pButtonRestart = new Sprite(GameFramework::imagesPath() + "buttonRestart.png");
+    m_pButtonRestart->setPos(QPOINT_TEXT_MENU_BUTTON_RESTART);
 
     m_pButtonLeave = new Sprite(GameFramework::imagesPath() + "buttonLeave.png");
     m_pButtonLeave->setPos(QPOINT_TEXT_MENU_BUTTON_LEAVE);
@@ -69,7 +73,8 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
     m_pSceneMenu->createText(QPOINT_CENTER_TEXT,"Menu du jeu",100);
 
     // Ajout des boutons à la scène menu
-    m_pSceneMenu->addSpriteToScene(m_pButtonPlay);
+    m_pSceneMenu->addSpriteToScene(m_pButtonResume);
+    m_pSceneMenu->addSpriteToScene(m_pButtonRestart);
     m_pSceneMenu->addSpriteToScene(m_pButtonLeave);
 
     // Création scène gagnante
@@ -98,9 +103,6 @@ GameCore::GameCore(GameCanvas* pGameCanvas, QObject* pParent) : QObject(pParent)
 
     // Création des sprites coeurs vie du joueur.
     createLifePlayer();
-
-    // Positionne la boule sur le rectangle et attend l'intéraction (espace) de l'utilisateur.
-    m_isWaiting = true;
 
     // Démarre le tick pour que les animations qui en dépendent fonctionnent correctement.
     // Attention : il est important que l'enclenchement du tick soit fait vers la fin de cette fonction,
@@ -160,10 +162,19 @@ void GameCore::keyReleased(int key) {
 //! \param elapsedTimeInMilliseconds  Temps écoulé depuis le dernier appel.
 void GameCore::tick(long long elapsedTimeInMilliseconds) {
     //float distance = PLAYER_SPEED * elapsedTimeInMilliseconds / 1000.0F * m_PlayerDirection;
-    // Test si la balle dépasse la valeur du mur du bas
-    if (m_pBasketBall->y() >= 685) {
+
+    if (m_playerLife == 0) {
+        m_pButtonResume->setOpacity(0);
+        if (m_isRestart) {
+            m_pButtonResume->setOpacity(1);
+            m_playerLife = 3;
+        }
+    }
+
+    // Test si la balle dépasse la valeur du mur du bas.
+    if (m_pBall->y() >= 685) {
         m_isWaiting = true;
-        m_pBasketBall->unregisterFromTick();
+        m_pBall->unregisterFromTick();
         m_playerLife--;
         m_isDead = true;
     }
@@ -171,10 +182,10 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     // Bloque la balle au centre du rectangle tant que l'utilisateur ne clique pas espace ou sur sa souris
     if (m_isWaiting) {
 
-        m_pBasketBall->setPos(m_pPlayer->x() - CENTERING_POS_X_BALL_RESPAWN, m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
-        static_cast<BouncingSpriteHandler*>(m_pBasketBall->tickHandler())->setSpriteVelocity(150,150);
-        // Si l'utilisateur appuie sur Espace ou effectue un clic avec la souris
-        // la balle continue sa trajectoire normalement
+        m_pBall->setPos(m_pPlayer->x() - CENTERING_POS_X_BALL_RESPAWN, m_pPlayer->y() - CENTERING_POS_Y_BALL_RESPAWN);
+        static_cast<BouncingSpriteHandler*>(m_pBall->tickHandler())->setSpriteVelocity(125,125);
+        // Si l'utilisateur appuie sur Espace ou effectue un clic gauche avec la souris
+        // la balle continue sa trajectoire normalement.
         if (m_keySpacePressed || m_onClick) {
 
             // Supprime le texte, réinitialise les valeurs et redémarre le tick
@@ -182,14 +193,12 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             textLifePlayer = nullptr;
             m_isWaiting = false;
             m_onClick = false;
-            m_pBasketBall->registerForTick();
+            m_pBall->registerForTick();
         }
     }
 
-
     // Affiche le nombre de vie(s) restant du joueur.
     if (m_isDead) {
-
 
         switch(m_playerLife)
         {
@@ -209,7 +218,7 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
             break;
         default:
             textLifePlayer = m_pSceneGame->createText(QPOINT_CENTER_TEXT_LIFE,
-                                                      QString("Vous n'avez plus de vie !\n Retournez au menu\n pour recommencer !"), 100);
+                                                      QString("Vous n'avez plus de vie.\n Retournez au menu\n pour recommencer !"), 100);
         }
     }
 
@@ -228,6 +237,8 @@ void GameCore::tick(long long elapsedTimeInMilliseconds) {
     } else if (m_pPlayer->x() >= MAX_VALUE_WALL)
         m_pPlayer->setX(MAX_VALUE_WALL);
 
+    // Évite que la balle parte sans que l'utilisateur ait effectué une interaction
+    m_onClick = false;
 }
 
 //! La souris a été déplacée.
@@ -246,33 +257,34 @@ void GameCore::mouseMoved(QPointF newMousePosition) {
 //! Traite l'appui sur un bouton de la souris.
 void GameCore::mouseButtonPressed(QPointF mousePosition, Qt::MouseButtons buttons) {
     emit notifyMouseButtonPressed(mousePosition, buttons);
-    //m_pScene->spriteAt(mousePosition);
     m_onClick = true;
 
     // Test si l'utilisateur fait un clique gauche et qu'il est sur le menu.
     if (buttons.testFlag(Qt::LeftButton) && m_pGameCanvas->currentScene() == m_pSceneMenu) {
 
         // Si oui, vérifie si il clique sur le bouton jouer .
-        if (m_pButtonPlay == m_pSceneMenu->spriteAt(mousePosition)) {
-            m_pButtonPlay->setOpacity(0.7);
+        if (m_pButtonResume == m_pSceneMenu->spriteAt(mousePosition)) {
             m_pGameCanvas->setCurrentScene(m_pSceneGame);
-            // Créé la scène de base et indique au canvas qu'il faut l'afficher.
-            //            m_pScene = m_pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
-            //            m_pGameCanvas->setCurrentScene(m_pScene);
 
-            // Sinon vérifie si il clique sur le bouton quitter.
-        } else if(m_pButtonLeave == m_pSceneMenu->spriteAt(mousePosition)) {
+        } else if(m_pButtonRestart == m_pSceneMenu->spriteAt(mousePosition)) {
+            // Recréer la scène de jeu et réinitialise les valeurs.
             m_pButtonLeave->setOpacity(0.7);
+            m_isRestart = true;
             m_pSceneGame = nullptr;
             m_pSceneGame = m_pGameCanvas->createScene(0, 0, SCENE_WIDTH, SCENE_WIDTH / GameFramework::screenRatio());
+            m_pSceneGame->setBackgroundColor(colorBackGround);
             createBlock();
             createPlayer();
+            createLifePlayer();
+            setupBouncingArea();
             m_pGameCanvas->setCurrentScene(m_pSceneGame);
-            //            QCoreApplication::quit();
-
+            // Sinon vérifie si il clique sur le bouton quitter.
+        } else if (m_pButtonLeave == m_pSceneMenu->spriteAt(mousePosition)) {
+            QCoreApplication::quit();
         }
     }
-
+    m_pButtonResume->setOpacity(1);
+    m_pButtonRestart->setOpacity(1);
 }
 
 //! Traite le relâchement d'un bouton de la souris.
@@ -310,11 +322,11 @@ void GameCore::setupBouncingArea() {
     m_pSceneGame->addRect(m_pSceneGame->sceneRect(), QPen(Qt::black));
 
     // Création de la balle de tennis qui rebondit
-    m_pBasketBall = new Sprite(GameFramework::imagesPath() + "basket.png");
-    m_pBasketBall->setTickHandler(new BouncingSpriteHandler);
-    m_pSceneGame->addSpriteToScene(m_pBasketBall);
+    m_pBall = new Sprite(GameFramework::imagesPath() + "basket.png");
+    m_pBall->setTickHandler(new BouncingSpriteHandler);
+    m_pSceneGame->addSpriteToScene(m_pBall);
 
-    m_pBasketBall->registerForTick();
+    m_pBall->registerForTick();
 
 }
 

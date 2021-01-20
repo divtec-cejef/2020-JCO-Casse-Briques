@@ -57,9 +57,10 @@ private:
 
     Sprite* m_pPlayer = nullptr;
     Sprite* m_pBloc = nullptr;
-    Sprite* m_pBasketBall = nullptr;
+    Sprite* m_pBall = nullptr;
     Sprite* m_pButtonLeave = nullptr;
-    Sprite* m_pButtonPlay = nullptr;
+    Sprite* m_pButtonRestart = nullptr;
+    Sprite* m_pButtonResume = nullptr;
     Sprite* m_pWinGame = nullptr;
     Sprite* m_pLossGame = nullptr;
     Sprite* m_pTrophy = nullptr;
@@ -70,9 +71,10 @@ private:
 
     bool m_keySpacePressed = false;
     bool m_keyEscPressed = false;
-    bool m_isWaiting = false;
+    bool m_isWaiting = true;
     bool m_isDead = false;
     bool m_onClick = false;
+    bool m_isRestart = false;
 
     int m_PlayerDirection = 1;
     int m_playerLife = 3;
