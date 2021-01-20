@@ -1,0 +1,456 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Casse-briques: Référence du fichier gamecore.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Casse-briques
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">Jeu représentant un casse-briques</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier gamecore.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="gamecore_8h_source.html">gamecore.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="sprite_8h_source.html">sprite.h</a>&quot;</code><br />
+<code>#include &lt;QDebug&gt;</code><br />
+<code>#include &lt;QSettings&gt;</code><br />
+<code>#include &lt;QPainter&gt;</code><br />
+<code>#include &lt;QString&gt;</code><br />
+<code>#include &lt;QColor&gt;</code><br />
+<code>#include &lt;QCoreApplication&gt;</code><br />
+<code>#include &quot;<a class="el" href="gamescene_8h_source.html">gamescene.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="gamecanvas_8h_source.html">gamecanvas.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="resources_8h_source.html">resources.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utilities_8h_source.html">utilities.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="bouncingspritehandler_8h_source.html">bouncingspritehandler.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="playertickhandler_8h_source.html">playertickhandler.h</a>&quot;</code><br />
+</div>
+<p><a href="gamecore_8cpp_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:aa4ab1c2c315cd91a2dfe1f5a78c45445"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#aa4ab1c2c315cd91a2dfe1f5a78c45445">SCENE_WIDTH</a> = 1280</td></tr>
+<tr class="separator:aa4ab1c2c315cd91a2dfe1f5a78c45445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeccbca78209b021b1093a66aef84aaa9"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#aeccbca78209b021b1093a66aef84aaa9">CENTERING_POS_X_BALL_RESPAWN</a> = 20</td></tr>
+<tr class="separator:aeccbca78209b021b1093a66aef84aaa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcc5e41df52ab50e8f57fc5c5d5142a0"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#afcc5e41df52ab50e8f57fc5c5d5142a0">CENTERING_POS_Y_BALL_RESPAWN</a> = 40</td></tr>
+<tr class="separator:afcc5e41df52ab50e8f57fc5c5d5142a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27d5b37e4dbab143a2dab99199eb532f"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#a27d5b37e4dbab143a2dab99199eb532f">BRICK_SIZE</a> = 15</td></tr>
+<tr class="separator:a27d5b37e4dbab143a2dab99199eb532f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af20ccc736472f349bddae21e7ab9ddec"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#af20ccc736472f349bddae21e7ab9ddec">MIN_VALUE_WALL</a> = 32</td></tr>
+<tr class="separator:af20ccc736472f349bddae21e7ab9ddec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25842b6eae245a24d523015a757c30aa"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#a25842b6eae245a24d523015a757c30aa">MAX_VALUE_WALL</a> = 1250</td></tr>
+<tr class="separator:a25842b6eae245a24d523015a757c30aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a566a529aee221589e7742169cc5b9c74"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#a566a529aee221589e7742169cc5b9c74">SPACE_LIFE_PLAYER</a> = 75</td></tr>
+<tr class="separator:a566a529aee221589e7742169cc5b9c74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65d217bf47af5aefc571d616a31fe336"><td class="memItemLeft" align="right" valign="top">const float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#a65d217bf47af5aefc571d616a31fe336">BOUNCING_AREA_SIZE</a> = 86.5</td></tr>
+<tr class="separator:a65d217bf47af5aefc571d616a31fe336"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c2a822f9ce5677768b285ee19660350"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#a1c2a822f9ce5677768b285ee19660350">QPOINT_CENTER_TEXT_LIFE</a> (250,-125)</td></tr>
+<tr class="separator:a1c2a822f9ce5677768b285ee19660350"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8581ac3ec61d5fc274d6a31a85529062"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#a8581ac3ec61d5fc274d6a31a85529062">QPOINT_CENTER_TEXT</a> (400, 300)</td></tr>
+<tr class="separator:a8581ac3ec61d5fc274d6a31a85529062"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4898e16e647d07013e8cc508ee8006ef"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#a4898e16e647d07013e8cc508ee8006ef">QPOINT_CENTER_TEXT_WIN</a> (200,-100)</td></tr>
+<tr class="separator:a4898e16e647d07013e8cc508ee8006ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a287522c9e868b4362baa1df8ad56b559"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#a287522c9e868b4362baa1df8ad56b559">QPOINT_CENTER_UNDER_TEXT_WIN</a> (200, 700)</td></tr>
+<tr class="separator:a287522c9e868b4362baa1df8ad56b559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2bfb2c1793332e41a4128af8e8cd036"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#ae2bfb2c1793332e41a4128af8e8cd036">QPOINT_TEXT_MENU_BUTTON_RESUME</a> (650, 500)</td></tr>
+<tr class="separator:ae2bfb2c1793332e41a4128af8e8cd036"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6eb34370841f73c480bb27fdedab732"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#ae6eb34370841f73c480bb27fdedab732">QPOINT_TEXT_MENU_BUTTON_RESTART</a> (650, 600)</td></tr>
+<tr class="separator:ae6eb34370841f73c480bb27fdedab732"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01220ee8ff91456f235febc7144a8143"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gamecore_8cpp.html#a01220ee8ff91456f235febc7144a8143">QPOINT_TEXT_MENU_BUTTON_LEAVE</a> (650, 700)</td></tr>
+<tr class="separator:a01220ee8ff91456f235febc7144a8143"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentation des variables</h2>
+<a id="a65d217bf47af5aefc571d616a31fe336"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65d217bf47af5aefc571d616a31fe336">&#9670;&nbsp;</a></span>BOUNCING_AREA_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const float BOUNCING_AREA_SIZE = 86.5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="gamecore_8cpp_source.html#l00034">34</a> du fichier <a class="el" href="gamecore_8cpp_source.html">gamecore.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a27d5b37e4dbab143a2dab99199eb532f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27d5b37e4dbab143a2dab99199eb532f">&#9670;&nbsp;</a></span>BRICK_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int BRICK_SIZE = 15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="gamecore_8cpp_source.html#l00030">30</a> du fichier <a class="el" href="gamecore_8cpp_source.html">gamecore.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aeccbca78209b021b1093a66aef84aaa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeccbca78209b021b1093a66aef84aaa9">&#9670;&nbsp;</a></span>CENTERING_POS_X_BALL_RESPAWN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int CENTERING_POS_X_BALL_RESPAWN = 20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="gamecore_8cpp_source.html#l00028">28</a> du fichier <a class="el" href="gamecore_8cpp_source.html">gamecore.cpp</a>.</p>
+
+</div>
+</div>
+<a id="afcc5e41df52ab50e8f57fc5c5d5142a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcc5e41df52ab50e8f57fc5c5d5142a0">&#9670;&nbsp;</a></span>CENTERING_POS_Y_BALL_RESPAWN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int CENTERING_POS_Y_BALL_RESPAWN = 40</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="gamecore_8cpp_source.html#l00029">29</a> du fichier <a class="el" href="gamecore_8cpp_source.html">gamecore.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a25842b6eae245a24d523015a757c30aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25842b6eae245a24d523015a757c30aa">&#9670;&nbsp;</a></span>MAX_VALUE_WALL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int MAX_VALUE_WALL = 1250</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="gamecore_8cpp_source.html#l00032">32</a> du fichier <a class="el" href="gamecore_8cpp_source.html">gamecore.cpp</a>.</p>
+
+</div>
+</div>
+<a id="af20ccc736472f349bddae21e7ab9ddec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af20ccc736472f349bddae21e7ab9ddec">&#9670;&nbsp;</a></span>MIN_VALUE_WALL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int MIN_VALUE_WALL = 32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="gamecore_8cpp_source.html#l00031">31</a> du fichier <a class="el" href="gamecore_8cpp_source.html">gamecore.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8581ac3ec61d5fc274d6a31a85529062"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8581ac3ec61d5fc274d6a31a85529062">&#9670;&nbsp;</a></span>QPOINT_CENTER_TEXT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a> QPOINT_CENTER_TEXT(400, 300) </td>
+          <td>(</td>
+          <td class="paramtype">400&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">300&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c2a822f9ce5677768b285ee19660350"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c2a822f9ce5677768b285ee19660350">&#9670;&nbsp;</a></span>QPOINT_CENTER_TEXT_LIFE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a> QPOINT_CENTER_TEXT_LIFE(250,-125) </td>
+          <td>(</td>
+          <td class="paramtype">250&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">-&#160;</td>
+          <td class="paramname"><em>125</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4898e16e647d07013e8cc508ee8006ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4898e16e647d07013e8cc508ee8006ef">&#9670;&nbsp;</a></span>QPOINT_CENTER_TEXT_WIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a> QPOINT_CENTER_TEXT_WIN(200,-100) </td>
+          <td>(</td>
+          <td class="paramtype">200&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">-&#160;</td>
+          <td class="paramname"><em>100</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a287522c9e868b4362baa1df8ad56b559"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a287522c9e868b4362baa1df8ad56b559">&#9670;&nbsp;</a></span>QPOINT_CENTER_UNDER_TEXT_WIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a> QPOINT_CENTER_UNDER_TEXT_WIN(200, 700) </td>
+          <td>(</td>
+          <td class="paramtype">200&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">700&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a01220ee8ff91456f235febc7144a8143"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01220ee8ff91456f235febc7144a8143">&#9670;&nbsp;</a></span>QPOINT_TEXT_MENU_BUTTON_LEAVE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a> QPOINT_TEXT_MENU_BUTTON_LEAVE(650, 700) </td>
+          <td>(</td>
+          <td class="paramtype">650&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">700&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae6eb34370841f73c480bb27fdedab732"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6eb34370841f73c480bb27fdedab732">&#9670;&nbsp;</a></span>QPOINT_TEXT_MENU_BUTTON_RESTART</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a> QPOINT_TEXT_MENU_BUTTON_RESTART(650, 600) </td>
+          <td>(</td>
+          <td class="paramtype">650&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">600&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae2bfb2c1793332e41a4128af8e8cd036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2bfb2c1793332e41a4128af8e8cd036">&#9670;&nbsp;</a></span>QPOINT_TEXT_MENU_BUTTON_RESUME</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" href="http://qt-project.org/doc/qt-5/qpointf.html">QPointF</a> QPOINT_TEXT_MENU_BUTTON_RESUME(650, 500) </td>
+          <td>(</td>
+          <td class="paramtype">650&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">500&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa4ab1c2c315cd91a2dfe1f5a78c45445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4ab1c2c315cd91a2dfe1f5a78c45445">&#9670;&nbsp;</a></span>SCENE_WIDTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int SCENE_WIDTH = 1280</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fichier qui contient toute la logique du jeu.</p>
+<dl class="section author"><dt>Auteur</dt><dd>RBR </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>décembre 2020 </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="gamecore_8cpp_source.html#l00027">27</a> du fichier <a class="el" href="gamecore_8cpp_source.html">gamecore.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a566a529aee221589e7742169cc5b9c74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a566a529aee221589e7742169cc5b9c74">&#9670;&nbsp;</a></span>SPACE_LIFE_PLAYER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int SPACE_LIFE_PLAYER = 75</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="gamecore_8cpp_source.html#l00033">33</a> du fichier <a class="el" href="gamecore_8cpp_source.html">gamecore.cpp</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré le Mercredi 20 Janvier 2021 11:20:59 pour Casse-briques par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>
