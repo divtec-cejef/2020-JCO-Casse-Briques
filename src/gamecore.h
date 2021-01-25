@@ -15,14 +15,11 @@
 #include <QGraphicsSimpleTextItem>
 #include <QImage>
 
-
 class GameCanvas;
 class GameScene;
 class Sprite;
 
-
 //! \brief Classe qui gère la logique du jeu.
-//!
 //! Dans son état actuel, cette classe crée une scène vide, délimite
 //! sa surface avec une ligne blanche puis démarre la cadence du jeu.
 class GameCore : public QObject
@@ -71,10 +68,10 @@ private:
 
     bool m_keySpacePressed = false;
     bool m_keyEscPressed = false;
-    bool m_isWaiting = true;
     bool m_isDead = false;
     bool m_onClick = false;
     bool m_isRestart = false;
+    bool m_isWaiting = true;
 
     int m_PlayerDirection = 1;
     int m_playerLife = 3;
@@ -84,21 +81,29 @@ private:
     int m_spaceColumns = 0;
     int m_counterBlock = 54;
 
-    QColor colorReturnMenu = QColor(107,245,138);
-    QColor colorBackGround = QColor(200,191,231);
+    QColor m_colorReturnMenu = QColor(107,245,138);
+    QColor m_colorBackGround = QColor(200,191,231);
 
-    QGraphicsSimpleTextItem* textLifePlayer = nullptr;
+    QGraphicsSimpleTextItem* m_textLifePlayer = nullptr;
+    QGraphicsSimpleTextItem* m_textMenuResume = nullptr;
+    QGraphicsSimpleTextItem* m_textMenuRestart = nullptr;
+    QGraphicsSimpleTextItem* m_textMenuLeave = nullptr;
 
     void setupBlueBall();
     void setupBouncingArea();
+    void setupBackGroundMenu();
+    void createBlock();
+    void createPlayer();
+    void createButton();
     void createLifePlayer();
+    void createSceneWin();
+    void createSceneLoss();
+    void createSceneGame();
+    void createSceneMenu();
 
 
 private slots:
-    void onSpriteDestroyed(QObject* pSprite);
-    void createBlock();
-    void createPlayer();
-
+    void onSpriteDestroyed();
 };
 
 

@@ -65,7 +65,7 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
         float minOverlapY = ballFromTop ? overlapTop : overlapBottom;
 
         if(std::abs(minOverlapX) < std::abs(minOverlapY))
-            m_spriteVelocity.setX(ballFromLeft ? -200 : 200);
+            m_spriteVelocity.setX(ballFromLeft ? -initialVelocity : initialVelocity);
         else
             m_spriteVelocity.setY(ballFromTop ? -initialVelocity : initialVelocity);
 
@@ -76,7 +76,7 @@ void BouncingSpriteHandler::tick(long long elapsedTimeInMilliseconds) {
         for(int i = 0; i<collidingSprites.size(); i++) {
             if (collidingSprites.at(i)->data(0).toString() == "bloc-a-detruire") {
                 collidingSprites.at(i)->deleteLater();
-                initialVelocity += 5;
+                initialVelocity += 10;
             }
         }
 

@@ -30,7 +30,8 @@ public:
     {
         if (MainFrm->objectName().isEmpty())
             MainFrm->setObjectName(QString::fromUtf8("MainFrm"));
-        MainFrm->resize(1480, 1025);
+        MainFrm->setEnabled(true);
+        MainFrm->resize(1400, 1100);
         QFont font;
         font.setFamily(QString::fromUtf8("8514oem"));
         font.setPointSize(15);
@@ -64,6 +65,7 @@ public:
 
         grvGame = new GameView(MainFrm);
         grvGame->setObjectName(QString::fromUtf8("grvGame"));
+        grvGame->setMaximumSize(QSize(16777215, 16777215));
         QFont font2;
         font2.setFamily(QString::fromUtf8("8514oem"));
         font2.setPointSize(15);

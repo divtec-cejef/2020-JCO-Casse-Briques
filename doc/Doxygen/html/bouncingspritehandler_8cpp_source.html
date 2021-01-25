@@ -120,7 +120,7 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">float</span> minOverlapY = ballFromTop ? overlapTop : overlapBottom;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">if</span>(std::abs(minOverlapX) &lt; std::abs(minOverlapY))</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <a class="code" href="class_bouncing_sprite_handler.html#aab2d7af42f11b75cb1534db81f88e207">m_spriteVelocity</a>.<a class="codeRef" href="http://qt-project.org/doc/qt-5/qpointf.html#setX">setX</a>(ballFromLeft ? -200 : 200);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <a class="code" href="class_bouncing_sprite_handler.html#aab2d7af42f11b75cb1534db81f88e207">m_spriteVelocity</a>.<a class="codeRef" href="http://qt-project.org/doc/qt-5/qpointf.html#setX">setX</a>(ballFromLeft ? -<a class="code" href="class_bouncing_sprite_handler.html#a77393b68dd7ea45ed539af5bc29df8d2">initialVelocity</a> : <a class="code" href="class_bouncing_sprite_handler.html#a77393b68dd7ea45ed539af5bc29df8d2">initialVelocity</a>);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <a class="code" href="class_bouncing_sprite_handler.html#aab2d7af42f11b75cb1534db81f88e207">m_spriteVelocity</a>.<a class="codeRef" href="http://qt-project.org/doc/qt-5/qpointf.html#setY">setY</a>(ballFromTop ? -<a class="code" href="class_bouncing_sprite_handler.html#a77393b68dd7ea45ed539af5bc29df8d2">initialVelocity</a> : <a class="code" href="class_bouncing_sprite_handler.html#a77393b68dd7ea45ed539af5bc29df8d2">initialVelocity</a>);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
@@ -131,7 +131,7 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i&lt;collidingSprites.size(); i++) {</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">if</span> (collidingSprites.at(i)-&gt;data(0).toString() == <span class="stringliteral">&quot;bloc-a-detruire&quot;</span>) {</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                collidingSprites.at(i)-&gt;deleteLater();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <a class="code" href="class_bouncing_sprite_handler.html#a77393b68dd7ea45ed539af5bc29df8d2">initialVelocity</a> += 5;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <a class="code" href="class_bouncing_sprite_handler.html#a77393b68dd7ea45ed539af5bc29df8d2">initialVelocity</a> += 10;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            }</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
@@ -172,7 +172,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Généré le Mercredi 20 Janvier 2021 11:20:58 pour Casse-briques par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Généré le Lundi 25 Janvier 2021 11:08:26 pour Casse-briques par&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
